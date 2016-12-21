@@ -1,0 +1,3 @@
+*.rb text eol=lf
+*.md text eol=lf
+.git* text eol=lf

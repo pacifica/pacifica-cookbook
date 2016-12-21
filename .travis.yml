@@ -1,0 +1,31 @@
+sudo: required
+dist: trusty
+addons:
+  apt:
+    sources:
+      - chef-stable-trusty
+    packages:
+      - chefdk
+
+install: echo "skip bundle install"
+
+services: docker
+before_script:
+  - eval "$(/opt/chefdk/bin/chef shell-init bash)"
+
+script:
+  - /opt/chefdk/embedded/bin/chef --version
+  - /opt/chefdk/embedded/bin/cookstyle --version
+  - /opt/chefdk/embedded/bin/cookstyle
+  - /opt/chefdk/embedded/bin/foodcritic --version
+  - /opt/chefdk/embedded/bin/foodcritic .
+  - /opt/chefdk/embedded/bin/rspec --version
+  - /opt/chefdk/embedded/bin/rspec
+
+notifications:
+  email:
+    recipients:
+      - dmlb2000@gmail.com
+      - gitbytes@gmail.com
+    on_failure: never
+    on_success: always
