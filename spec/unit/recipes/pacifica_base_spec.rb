@@ -38,13 +38,12 @@ describe 'test::pacifica_base' do
         cached(:chef_run) do
           ChefSpec::ServerRunner.new(
             platform: platform, version: version, step_into: base_resource.keys
-          ) do |node, server|
-            server.create_data_bag('pacifica',
-              {
-                'uploader' => {
-                  id: 'uploader',
-                  config: 'this is the config'
-                }
+          ) do |_node, server|
+            server.create_data_bag(
+              'pacifica',
+              'uploader' => {
+                id: 'uploader',
+                config: 'this is the config',
               }
             )
           end.converge(described_recipe)
