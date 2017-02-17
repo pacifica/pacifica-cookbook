@@ -36,10 +36,18 @@ describe 'test::pacifica_base' do
     versions.each do |version|
       context "on an #{platform.capitalize}-#{version} box" do
         cached(:chef_run) do
-          runner = ChefSpec::ServerRunner.new(
+          ChefSpec::ServerRunner.new(
             platform: platform, version: version, step_into: base_resource.keys
-          )
-          runner.converge(described_recipe)
+          ) do |node, server|
+            server.create_data_bag('pacifica',
+              {
+                'uploader' => {
+                  id: 'uploader',
+                  config: 'this is the config'
+                }
+              }
+            )
+          end.converge(described_recipe)
         end
 
         base_resource.each do |resource_key, resource_value|
