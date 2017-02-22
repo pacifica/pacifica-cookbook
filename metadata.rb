@@ -10,7 +10,7 @@ end
 if respond_to?(:source_url)
   source_url 'https://github.com/pacifica/pacifica-cookbook'
 end
-version '0.1.1'
+version '0.1.2'
 
 chef_version '>= 12'
 
