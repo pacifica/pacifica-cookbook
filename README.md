@@ -76,6 +76,8 @@ These services will need to be configured to taste before utilizing the custom r
   libraries/pacifica_base.rb and tailored resource properties
 - [pacifica_policy](#pacifica_policy): composite resource that uses
   libraries/pacifica_base.rb and tailored resource properties
+- [pacifica_proxy](#pacifica_proxy): composite resource that uses
+  libraries/pacifica_base.rb and tailored resource properties
 - [pacifica_uniqueid](#pacifica_uniqueid): composite resource that uses
   libraries/pacifica_base.rb and tailored resource properties
 - [pacifica_uploaderbackend](#pacifica_uploaderbackend): composite resource that uses
@@ -192,6 +194,16 @@ The `pacifica_policy` resource manages the policy service and associated configu
 
 ```ruby
 pacifica_policy 'policy'
+```
+
+## pacifica_proxy
+
+The `pacifica_proxy` resource manages the proxy service and associated configuration.
+
+### Example
+
+```ruby
+pacifica_proxy 'proxy'
 ```
 
 ## pacifica_uniqueid
