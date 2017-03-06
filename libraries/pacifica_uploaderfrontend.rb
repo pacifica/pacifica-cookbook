@@ -21,7 +21,12 @@ module PacificaCookbook
         },
       }
     }
-    property :wsgi_file, String, default: 'UploadServer/wsgi.py'
+    property :run_command, String, default: lazy {
+      "#{virtualenv_dir}/bin/uwsgi "\
+      "--http-socket :#{port} "\
+      '--master -p 1 '\
+      '--wsgi-file UploadServer/wsgi.py'
+    }
     property :port, Integer, default: 8000
     resource_name :pacifica_uploaderfrontend
   end
