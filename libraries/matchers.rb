@@ -47,6 +47,12 @@ if defined?(ChefSpec)
     )
   end
 
+  def create_pacifica_proxy(resource_name)
+    ChefSpec::Matchers::ResourceMatcher.new(
+      :pacifica_proxy, :create, resource_name
+    )
+  end
+
   def create_pacifica_reporting(resource_name)
     ChefSpec::Matchers::ResourceMatcher.new(
       :pacifica_reporting, :create, resource_name

@@ -13,6 +13,7 @@ describe 'test::pacifica_base' do
     pacifica_cartbackend: 'cartd',
     pacifica_metadata: 'metadata',
     pacifica_policy: 'policy',
+    pacifica_proxy: 'proxy',
     pacifica_uniqueid: 'uniqueid',
     pacifica_ingestbackend: 'ingestd',
     pacifica_ingestfrontend: 'ingestwsgi',
