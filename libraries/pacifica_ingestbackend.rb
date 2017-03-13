@@ -7,7 +7,7 @@ module PacificaCookbook
 
     property :name, String, name_property: true
     property :git_opts, Hash, default: {
-      repository: 'https://github.com/EMSL-MSC/pacifica-ingest.git',
+      repository: 'https://github.com/pacifica/pacifica-ingest.git',
     }
     property :service_opts, Hash, default: lazy {
       {

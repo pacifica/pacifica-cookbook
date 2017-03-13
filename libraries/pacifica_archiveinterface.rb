@@ -7,7 +7,7 @@ module PacificaCookbook
 
     property :name, String, name_property: true
     property :git_opts, Hash, default: {
-      repository: 'https://github.com/EMSL-MSC/pacifica-archiveinterface.git',
+      repository: 'https://github.com/pacifica/pacifica-archiveinterface.git',
     }
     property :script_opts, Hash, default: lazy {
       {

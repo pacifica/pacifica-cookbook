@@ -7,7 +7,7 @@ module PacificaCookbook
 
     property :name, String, name_property: true
     property :git_opts, Hash, default: {
-      repository: 'https://github.com/EMSL-MSC/pacifica-policy.git',
+      repository: 'https://github.com/pacifica/pacifica-policy.git',
     }
     property :wsgi_file, String, default: 'PolicyServer.py'
     property :port, Integer, default: 8181

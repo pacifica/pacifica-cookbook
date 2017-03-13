@@ -7,7 +7,7 @@ module PacificaCookbook
 
     property :name, String, name_property: true
     property :git_opts, Hash, default: {
-      repository: 'https://github.com/EMSL-MSC/pacifica-cartd.git',
+      repository: 'https://github.com/pacifica/pacifica-cartd.git',
     }
     property :directory_opts, Hash, default: lazy {
       {
@@ -25,6 +25,13 @@ module PacificaCookbook
           AMQP_VHOST: '/cart',
         },
       }
+    }
+    property :run_command, String, default: lazy {
+      "#{virtualenv_dir}/bin/uwsgi "\
+      "--http-socket :#{port} "\
+      "--master -p #{node['cpu']['total']} "\
+      '--wsgi-disable-file-wrapper '\
+      "--wsgi-file #{source_dir}/#{wsgi_file}"
     }
     property :wsgi_file, String, default: 'cartserver.py'
     property :port, Integer, default: 8081

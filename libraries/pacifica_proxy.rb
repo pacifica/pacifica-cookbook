@@ -7,7 +7,7 @@ module PacificaCookbook
 
     property :name, String, name_property: true
     property :git_opts, Hash, default: {
-      repository: 'https://github.com/EMSL-MSC/pacifica-proxy.git',
+      repository: 'https://github.com/pacifica/pacifica-proxy.git',
     }
     property :wsgi_file, String, default: 'ProxyServer.py'
     property :port, Integer, default: 8180
