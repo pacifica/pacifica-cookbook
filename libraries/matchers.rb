@@ -19,7 +19,7 @@ if defined?(ChefSpec)
 
   def create_pacifica_ingestbackend(resource_name)
     ChefSpec::Matchers::ResourceMatcher.new(
-      :pacifica_archiveinterface, :create, resource_name
+      :pacifica_ingestbackend, :create, resource_name
     )
   end
 
