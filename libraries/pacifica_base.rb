@@ -37,6 +37,7 @@ module PacificaCookbook
       base_python_execute_requirements
       base_python_execute_uwsgi
       base_python_execute_build
+      base_python_execute_dbcreate
       base_file
       base_systemd_service
       base_service

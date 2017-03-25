@@ -119,6 +119,19 @@ HDOC
         end
       end
 
+      def base_python_execute_dbcreate
+        python_execute "#{new_resource.name}_dbcreate" do
+          virtualenv virtualenv_dir
+          cwd source_dir
+          command "DatabaseCreate.py && touch #{prefix_dir}/.dbcreate"
+          only_if { ::File.exist?("#{source_dir}/DatabaseCreate.py") }
+          not_if { ::File.exist?("#{prefix_dir}/.dbcreate") }
+          build_opts.each do |attr, value|
+            send(attr, value)
+          end
+        end
+      end
+
       def base_python_execute_build
         python_execute "#{new_resource.name}_build" do
           virtualenv virtualenv_dir
