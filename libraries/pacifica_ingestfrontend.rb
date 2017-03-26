@@ -12,7 +12,7 @@ module PacificaCookbook
     property :service_opts, Hash, default: lazy {
       {
         environment: {
-          VOLUME_PATH: "/srv/",
+          VOLUME_PATH: '/srv/',
           MYSQL_ENV_MYSQL_DATABASE: 'ingest',
           MYSQL_ENV_MYSQL_PASSWORD: 'ingest',
           MYSQL_ENV_MYSQL_USER: 'ingest',
