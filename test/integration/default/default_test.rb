@@ -6,8 +6,6 @@
 # found at https://docs.chef.io/inspec_reference.html
 
 %w(
-  8080
-  8081
   8066
   8121
   8181

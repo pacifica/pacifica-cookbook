@@ -24,7 +24,7 @@ module PacificaCookbook
     property :run_command, String, default: lazy {
       "#{virtualenv_dir}/bin/uwsgi "\
       "--http-socket :#{port} "\
-      '--master -p 1 '\
+      '--master -p 1 --die-on-term '\
       '--wsgi-file UploadServer/wsgi.py'
     }
     property :port, Integer, default: 8000

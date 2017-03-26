@@ -22,6 +22,7 @@ module PacificaCookbook
       "#{virtualenv_dir}/bin/uwsgi "\
       "--http-socket :#{port} "\
       "--master -p #{node['cpu']['total']} "\
+      '--die-on-term '\
       "--wsgi-file #{source_dir}/#{wsgi_file}"
     }
     default_action :create

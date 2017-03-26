@@ -124,6 +124,7 @@ HDOC
           virtualenv virtualenv_dir
           cwd source_dir
           command "DatabaseCreate.py && touch #{prefix_dir}/.dbcreate"
+          environment service_opts[:environment] if service_opts.key?(:environment)
           only_if { ::File.exist?("#{source_dir}/DatabaseCreate.py") }
           not_if { ::File.exist?("#{prefix_dir}/.dbcreate") }
           build_opts.each do |attr, value|
