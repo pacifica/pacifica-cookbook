@@ -9,16 +9,10 @@ module PacificaCookbook
     property :git_opts, Hash, default: {
       repository: 'https://github.com/pacifica/pacifica-ingest.git',
     }
-    property :directory_opts, Hash, default: lazy {
-      {
-        path: "#{prefix_dir}/ingestdata",
-        recursive: true,
-      }
-    }
     property :service_opts, Hash, default: lazy {
       {
         environment: {
-          VOLUME_PATH: "#{prefix_dir}/cartdata",
+          VOLUME_PATH: '/srv/',
           MYSQL_ENV_MYSQL_DATABASE: 'ingest',
           MYSQL_ENV_MYSQL_PASSWORD: 'ingest',
           MYSQL_ENV_MYSQL_USER: 'ingest',

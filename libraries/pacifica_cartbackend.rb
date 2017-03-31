@@ -13,8 +13,9 @@ module PacificaCookbook
       {
         environment: {
           PYTHONPATH: "#{virtualenv_dir}/lib/python2.7/site-packages",
-          VOLUME_PATH: "#{prefix_dir}/cartdata/",
-          LRU_BUFFER_TIME: 0,
+          VOLUME_PATH: '/srv/',
+          LRU_BUFFER_TIME: '0',
+          MYSQL_ENV_MYSQL_DATABASE: 'cartd',
           MYSQL_ENV_MYSQL_PASSWORD: 'cart',
           MYSQL_ENV_MYSQL_USER: 'cart',
           AMQP_VHOST: '/cart',

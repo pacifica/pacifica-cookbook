@@ -21,6 +21,13 @@ exec -a #{name} #{run_command}
 EOF
       }
     }
+    property :service_opts, Hash, default: lazy {
+      {
+        environment: {
+          ARCHIVEI_CONFIG: "#{source_dir}/config.cfg",
+        },
+      }
+    }
     property :wsgi_file, String, default: 'archiveinterface/wsgi.py'
     property :port, Integer, default: 8080
   end

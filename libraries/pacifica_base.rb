@@ -22,6 +22,7 @@ module PacificaCookbook
       "#{virtualenv_dir}/bin/uwsgi "\
       "--http-socket :#{port} "\
       "--master -p #{node['cpu']['total']} "\
+      '--die-on-term '\
       "--wsgi-file #{source_dir}/#{wsgi_file}"
     }
     default_action :create
@@ -37,6 +38,7 @@ module PacificaCookbook
       base_python_execute_requirements
       base_python_execute_uwsgi
       base_python_execute_build
+      base_python_execute_dbcreate
       base_file
       base_systemd_service
       base_service
