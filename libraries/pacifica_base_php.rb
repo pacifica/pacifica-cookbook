@@ -99,8 +99,14 @@ module PacificaCookbook
         min_spare_servers: node['cpu']['total'],
         max_spare_servers: node['cpu']['total'],
       }
+      case node['platform_family']
+      when 'rhel', 'fedora', 'amazon'
+        php_log_dir = '/var/log/php-fpm'
+      when 'debian'
+        php_log_dir = '/var/log'
+      end
       default_additional_attrs = {
-        'access.log' => "/var/log/php-fpm/#{new_resource.name}-access.log",
+        'access.log' => "#{php_log_dir}/#{new_resource.name}-access.log",
         'access.format' => '"%R - %u %t \"%m %{REQUEST_URI}e\" %s"',
         'catch_workers_output' => 'yes',
       }

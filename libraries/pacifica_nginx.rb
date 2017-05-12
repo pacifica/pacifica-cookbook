@@ -32,18 +32,16 @@ module PacificaCookbook
                      'www-data'
                    end
       directory '/etc/nginx'
+      package 'nginx'
       template "nginx_#{name}_conf" do
         cookbook 'pacifica'
         source 'nginx.conf.erb'
         path '/etc/nginx/nginx.conf'
         variables(user: nginx_user)
-        notifies :restart, 'service[nginx]'
+        notifies :restart, 'service[nginx]', :immediately
         nginx_opts.each do |key, attr|
           send(key, attr)
         end
-      end
-      package 'nginx' do
-        options '--force-yes' if debian?
       end
       template "nginx_#{name}_site_conf" do
         cookbook 'pacifica'

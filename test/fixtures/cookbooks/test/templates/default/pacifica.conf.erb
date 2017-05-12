@@ -16,7 +16,7 @@
       AuthType Basic
       AuthName "Pacifica Uploader"
       AuthBasicProvider file
-      AuthUserFile "/etc/httpd/htpasswd"
+      AuthUserFile "<%= @apache_dir %>/htpasswd"
       Require user dmlb2001
     </Location>
     <Directory "/opt/reporting/source">
@@ -43,7 +43,7 @@
       AuthType Basic
       AuthName "Pacifica Uploader"
       AuthBasicProvider file
-      AuthUserFile "/etc/httpd/htpasswd"
+      AuthUserFile "<%= @apache_dir %>/htpasswd"
       Require user dmlb2001
     </Location>
     <Directory "/opt/status/source">
@@ -62,7 +62,7 @@
       AuthType Basic
       AuthName "Pacifica Uploader"
       AuthBasicProvider file
-      AuthUserFile "/etc/httpd/htpasswd"
+      AuthUserFile "<%= @apache_dir %>/htpasswd"
       Require user dmlb2001
     </Location>
     <Directory "/opt/uploaderwsgi/source">
