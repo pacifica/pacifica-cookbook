@@ -8,6 +8,7 @@ provisioner:
   # For example:
   #   always_update_cookbooks: <%= !ENV['CI'] %>
   always_update_cookbooks: true
+  require_chef_omnibus: 12
 
 verifier:
   name: inspec

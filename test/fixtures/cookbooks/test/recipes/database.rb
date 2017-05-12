@@ -3,9 +3,6 @@ include_recipe 'postgresql::server'
 include_recipe 'yum-mysql-community::mysql56'
 
 mysql2_chef_gem 'default' do
-  # Bug in upstream cookbook, need to migrate to standard mysql cookbook
-  provider Chef::Provider::Mysql2ChefGem::Mysql
-  # Chef::Provider::Mysql2ChefGem does not declare 'provides :mysql2_chef_gem'.
   action :install
 end
 
