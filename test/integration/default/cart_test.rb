@@ -9,24 +9,18 @@ describe port(8081) do
   it { should be_listening }
 end
 
-cartjson = File.open('/tmp/cart.json', 'w')
-cartjson.write <<EOF_JSON
+cartjson = <<EOF_JSON
 {
   "fileids": [
-    {"id":"foo.txt", "path":"1/2/3/foo.txt"}
+    {"id":"foo.txt", "path":"1/2/3/foo.txt", "hashtype": "sha1", "hashsum": "4cbd040533a2f43fc6691d773d510cda70f4126a"}
   ]
 }
 EOF_JSON
-cartjson.close
 
-describe command('curl -X POST --upload-file /tmp/cart.json http://127.0.0.1:8081/1234') do
+describe command("curl -X POST http://127.0.0.1:8081/1234 -d'#{cartjson}'") do
   its(:stdout) { should match /Cart Processing has begun/ }
 end
 
-describe command('sleep 3') do
-  its(:exit_status) { should eq 0 }
-end
-
-describe command('curl http://127.0.0.1:8081/1234 | file - | grep -q "POSIX tar archive"') do
+describe command('sleep 10; curl http://127.0.0.1:8081/1234 | file - | grep -q "POSIX tar archive"') do
   its(:exit_status) { should eq 0 }
 end
