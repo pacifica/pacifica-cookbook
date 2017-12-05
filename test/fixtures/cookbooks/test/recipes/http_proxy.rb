@@ -7,9 +7,7 @@ end
 template "#{node['apache']['dir']}/sites-available/pacifica.conf" do
   source 'pacifica.conf.erb'
   mode '0644'
-  variables({
-    apache_dir: node['apache']['dir']
-  })
+  variables(apache_dir: node['apache']['dir'])
   if File.symlink?("#{node['apache']['dir']}/sites-enabled/pacifica.conf")
     notifies :reload, 'service[apache2]'
   end

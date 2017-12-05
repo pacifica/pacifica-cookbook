@@ -27,18 +27,8 @@ describe 'test::pacifica_base' do
       allow(File).to receive(:exist?).with(
         "/opt/#{resource_value}/.dbcreate"
       ).and_return(false)
-      allow(File).to receive(:exist?).with(
-        "/opt/#{resource_value}/source/DatabaseCreate.py"
-      ).and_return(true)
       stub_command("DatabaseCreate.py && touch /opt/#{resource_value}/.dbcreate").and_return(true)
-      allow(File).to receive(:exist?).with(
-        "/opt/#{resource_value}/source/setup.py"
-      ).and_return(true)
-      stub_command("setup.py install --prefix /opt/#{resource_value}/virtualenv").and_return(true)
     end
-    stub_command(%r{/ls \/.*\/config.php/}).and_return(false)
-    stub_command('/usr/sbin/apache2 -t').and_return(true)
-    stub_command('/usr/sbin/httpd -t').and_return(true)
   end
   supported_platforms.each do |platform, versions|
     versions.each do |version|
@@ -74,10 +64,6 @@ describe 'test::pacifica_base' do
             expect(chef_run).to create_directory("/opt/#{resource_value}")
           end
 
-          it "#{resource_key}:  Syncs #{resource_value} git repository" do
-            expect(chef_run).to sync_git("/opt/#{resource_value}/source")
-          end
-
           it "#{resource_key}:  Creates the #{resource_value} bash script file" do
             expect(chef_run).to create_file("/opt/#{resource_value}/#{resource_value}")
           end
@@ -88,7 +74,7 @@ describe 'test::pacifica_base' do
 
           it "#{resource_key}:  Creates #{resource_value} python virtual environment" do
             expect(chef_run).to create_python_virtualenv(
-              "/opt/#{resource_value}/virtualenv"
+              "/opt/#{resource_value}"
             )
           end
 
@@ -104,16 +90,8 @@ describe 'test::pacifica_base' do
             )
           end
 
-          it "#{resource_key}:  Builds #{resource_value} python virtual environment" do
-            expect(chef_run).to run_python_execute("#{resource_value}_build")
-          end
-
-          it "#{resource_key}:  DatabaseCreate #{resource_value} python virtual environment" do
-            expect(chef_run).to run_python_execute("#{resource_value}_dbcreate")
-          end
-
-          it "#{resource_key}:  Creates #{resource_value} systemd service" do
-            expect(chef_run).to create_systemd_service(resource_value)
+          it "#{resource_key}:  Creates #{resource_value} poise service" do
+            expect(chef_run).to create_poise_service(resource_value)
           end
 
           it "#{resource_key}:  Enables and starts the #{resource_value} service" do

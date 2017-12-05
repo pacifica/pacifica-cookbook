@@ -1,4 +1,4 @@
-name 'pacifica'
+name 'unit'
 maintainer 'David Brown'
 maintainer_email 'dmlb2000@gmail.com'
 license 'Apache v2.0'
@@ -10,22 +10,14 @@ end
 if respond_to?(:source_url)
   source_url 'https://github.com/pacifica/pacifica-cookbook'
 end
-version '0.2.0'
+version '0.1.0'
 
-chef_version '>= 12'
-
-supports 'ubuntu', '>= 16.04'
-supports 'centos', '>= 7.0'
-supports 'redhat', '>= 7.0'
-supports 'freebsd', '>= 11.0'
-
-depends 'apache2'
-depends 'git'
-depends 'poise-python'
-depends 'poise-service'
-depends 'php'
-depends 'varnish'
-depends 'chef-sugar'
-depends 'selinux'
-depends 'selinux_policy', '=1.1.0'
-depends 'yum-epel'
+depends 'pacifica'
+depends 'elasticsearch', '>= 3.0.0'
+depends 'java', '>= 1.40.0'
+depends 'postgresql', '< 6.0.0'
+depends 'database', '>= 6.1.0'
+depends 'yum-mysql-community', '>= 2.0.0'
+depends 'mysql2_chef_gem', '>= 1.1.0'
+depends 'mysql', '>= 8.2.0'
+depends 'chef-sugar', '>= 3.4.0'

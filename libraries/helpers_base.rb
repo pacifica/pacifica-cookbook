@@ -31,56 +31,50 @@ module PacificaCookbook
         end
       end
 
-      def base_git
-        git source_dir do
-          notifies :restart, "service[#{new_resource.name}]"
-          git_opts.each do |attr, value|
+      def base_config
+        template "#{prefix_dir}/#{new_resource.config_name}" do
+          source 'config.ini.erb'
+          cookbook 'pacifica'
+          owner 'root'
+          group 'root'
+          mode '0600'
+          notifies :restart, "service[#{new_resource.service_name}]"
+          config_opts.each do |attr, value|
             send(attr, value)
           end
         end
       end
 
       def base_file
-        file "#{prefix_dir}/#{new_resource.name}" do
+        file "#{prefix_dir}/#{new_resource.script_name}" do
           owner 'root'
           group 'root'
           mode '0700'
           content <<-HDOC
 #!/bin/bash
-. #{virtualenv_dir}/bin/activate
-export PYTHONPATH=#{virtualenv_dir}/lib64/python2.7/site-packages
+. #{prefix_dir}/bin/activate
 export LD_LIBRARY_PATH=/opt/chef/embedded/lib
 export LD_RUN_PATH=/opt/chef/embedded/lib
-cd #{source_dir}
-exec -a #{new_resource.name} #{run_command}
+exec -a #{new_resource.service_name} #{run_command}
 HDOC
-          notifies :restart, "service[#{new_resource.name}]"
+          notifies :restart, "service[#{new_resource.service_name}]"
           script_opts.each do |attr, value|
             send(attr, value)
           end
         end
       end
 
-      def base_systemd_service
-        systemd_service new_resource.name do
-          description "start #{new_resource.name} in python"
-          after %w(network.target)
-          install do
-            wanted_by 'multi-user.target'
+      def base_poise_service
+        poise_service new_resource.service_name do
+          command "#{prefix_dir}/#{new_resource.script_name}"
+          service_opts.each do |attr, value|
+            send(attr, value)
           end
-          service do
-            working_directory source_dir
-            exec_start "#{prefix_dir}/#{new_resource.name}"
-            service_opts.each do |attr, value|
-              send(attr, value)
-            end
-          end
-          notifies :restart, "service[#{new_resource.name}]"
         end
       end
 
       def base_service
-        service new_resource.name do
+        service new_resource.service_name do
           action [:enable, :start]
         end
       end
@@ -94,7 +88,7 @@ HDOC
       end
 
       def base_python_virtualenv
-        python_virtualenv virtualenv_dir do
+        python_virtualenv prefix_dir do
           virtualenv_opts.each do |attr, value|
             send(attr, value)
           end
@@ -103,43 +97,8 @@ HDOC
 
       def base_python_execute_requirements
         python_execute "#{new_resource.name}_requirements" do
-          virtualenv virtualenv_dir
-          command "-m pip install -r #{source_dir}/requirements.txt"
+          virtualenv prefix_dir
           pip_install_opts.each do |attr, value|
-            send(attr, value)
-          end
-        end
-      end
-
-      def base_python_execute_uwsgi
-        python_execute "#{new_resource.name}_uwsgi" do
-          virtualenv virtualenv_dir
-          command '-m pip install uwsgi'
-          not_if { ::File.exist?("#{virtualenv_dir}/bin/uwsgi") }
-        end
-      end
-
-      def base_python_execute_dbcreate
-        python_execute "#{new_resource.name}_dbcreate" do
-          virtualenv virtualenv_dir
-          cwd source_dir
-          command "DatabaseCreate.py && touch #{prefix_dir}/.dbcreate"
-          environment service_opts[:environment] if service_opts.key?(:environment)
-          only_if { ::File.exist?("#{source_dir}/DatabaseCreate.py") }
-          not_if { ::File.exist?("#{prefix_dir}/.dbcreate") }
-          build_opts.each do |attr, value|
-            send(attr, value)
-          end
-        end
-      end
-
-      def base_python_execute_build
-        python_execute "#{new_resource.name}_build" do
-          virtualenv virtualenv_dir
-          cwd source_dir
-          command "setup.py install --prefix #{virtualenv_dir}"
-          only_if { ::File.exist?("#{source_dir}/setup.py") }
-          build_opts.each do |attr, value|
             send(attr, value)
           end
         end
