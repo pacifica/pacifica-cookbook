@@ -11,6 +11,8 @@ module PacificaCookbook
             package_name 'sqlite-devel'
           elsif debian?
             package_name %w(sqlite3 sqlite3-doc libsqlite3-dev)
+          elsif freebsd?
+            package_name 'sqlite3'
           end
         end
       end
@@ -24,11 +26,15 @@ module PacificaCookbook
       end
 
       def base_git_client
-        git_client new_resource.name do
-          git_client_opts.each do |attr, value|
-            send(attr, value)
+        if freebsd?
+          package 'git'
+        else
+          git_client new_resource.name do
+            git_client_opts.each do |attr, value|
+              send(attr, value)
+            end
           end
-        end
+              end
       end
 
       def base_config
@@ -53,8 +59,8 @@ module PacificaCookbook
           content <<-HDOC
 #!/bin/bash
 . #{prefix_dir}/bin/activate
-export LD_LIBRARY_PATH=/opt/chef/embedded/lib
-export LD_RUN_PATH=/opt/chef/embedded/lib
+export LD_LIBRARY_PATH=/opt/chef/embedded/lib:/opt/rh/python27/root/usr/lib64
+export LD_RUN_PATH=/opt/chef/embedded/lib:/opt/rh/python27/root/usr/lib64
 exec -a #{new_resource.service_name} #{run_command}
 HDOC
           notifies :restart, "service[#{new_resource.service_name}]"
@@ -67,6 +73,7 @@ HDOC
       def base_poise_service
         poise_service new_resource.service_name do
           command "#{prefix_dir}/#{new_resource.script_name}"
+          provider :sysvinit if redhat? && (node['platform_version'].to_i == 6)
           service_opts.each do |attr, value|
             send(attr, value)
           end
@@ -80,9 +87,16 @@ HDOC
       end
 
       def base_python_runtime
-        python_runtime new_resource.name do
-          python_opts.each do |attr, value|
-            send(attr, value)
+        if freebsd?
+          short_version = python_opts[:version].delete('.')
+          package 'python packages' do
+            package_name %W(py#{short_version}-pip py#{short_version}-virtualenv)
+          end
+        else
+          python_runtime new_resource.name do
+            python_opts.each do |attr, value|
+              send(attr, value)
+            end
           end
         end
       end

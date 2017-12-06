@@ -22,9 +22,11 @@ platforms:
         compile_time_update: true
   - name: centos-6.9
   - name: centos-7.4
-  - name: freebsd-11.0
 
 suites:
   - name: archiveinterface
     run_list:
       - recipe[unit::archiveinterface]
+  - name: cart
+    run_list:
+      - recipe[unit::cart]

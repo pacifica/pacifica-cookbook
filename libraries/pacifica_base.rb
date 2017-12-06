@@ -18,7 +18,11 @@ module PacificaCookbook
     property :script_opts, Hash, default: {}
     property :config_opts, Hash, default: {}
     property :git_client_opts, Hash, default: {}
-    property :service_opts, Hash, default: {}
+    property :service_opts, Hash, default: lazy {
+      {
+        directory: prefix_dir
+      }
+    }
     property :port, Integer, default: 8080
     property :run_command, String, default: lazy {
       "#{prefix_dir}/bin/#{command_name}"
