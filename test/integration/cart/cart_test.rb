@@ -12,12 +12,12 @@ end
 cartjson = <<EOF_JSON
 {
   "fileids": [
-    {"id":"foo.txt", "path":"1/2/3/foo.txt", "hashtype": "sha1", "hashsum": "4cbd040533a2f43fc6691d773d510cda70f4126a"}
+    {"id":"foo.txt", "path":"1/2/3/foo.txt", "hashtype": "sha1", "hashsum": "7110eda4d09e062aa5e4a390b0a572ac0d2c0220"}
   ]
 }
 EOF_JSON
 
-describe command("curl -X POST http://127.0.0.1:8081/1234 -d'#{cartjson}'") do
+describe command("curl -X POST -H 'Content-Type: application/json' http://127.0.0.1:8081/1234 -d'#{cartjson}'") do
   its(:stdout) { should match /Cart Processing has begun/ }
 end
 

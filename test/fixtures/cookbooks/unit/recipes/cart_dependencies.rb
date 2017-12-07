@@ -1,4 +1,7 @@
 include_recipe 'unit::archiveinterface'
+execute 'Load Archive Data' do
+  command 'curl -X PUT http://127.0.0.1:8080/foo.txt -d1234'
+end
 include_recipe 'chef-sugar'
 include_recipe 'build-essential'
 packages = if rhel?
@@ -36,8 +39,8 @@ execute 'Create Database' do
   not_if "#{mysql_bin} -e 'show databases;' | grep -q pacifica_cart"
 end
 execute 'Grant/Create User' do
-  command "#{mysql_bin} -e 'grant all on pacifica_cart.* to cartd@'\\''%'\\'' identified by '\\''cartd'\\'';'"
-  not_if "#{mysql_bin} -e 'select * from mysql.user;' | grep cart"
+  command "#{mysql_bin} -e 'grant all on pacifica_cart.* to cartd@'\\''localhost'\\'' identified by '\\''cartd'\\'';'"
+  not_if "#{mysql_bin} -e 'select User from mysql.user;' | grep cartd"
 end
 include_recipe 'rabbitmq'
 include_recipe 'rabbitmq::virtualhost_management'
