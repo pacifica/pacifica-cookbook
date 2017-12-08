@@ -30,3 +30,6 @@ suites:
   - name: cart
     run_list:
       - recipe[unit::cart]
+  - name: metadata
+    run_list:
+      - recipe[unit::metadata]
