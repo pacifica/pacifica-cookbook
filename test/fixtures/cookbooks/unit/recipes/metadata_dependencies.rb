@@ -1,16 +1,8 @@
 include_recipe 'java'
 include_recipe 'elasticsearch'
-include_recipe 'postgresql::ruby'
-include_recipe 'postgresql::server'
-postgresql_connection_info = {
-  host: '127.0.0.1',
-  port: node['postgresql']['config']['port'],
-  username: 'postgres',
-  password: 'postgres',
-}
 
 {
-  metadata: {
+  pacifica_metadata: {
     provider: Chef::Provider::Database::Postgresql,
     connection: postgresql_connection_info,
   },
@@ -23,9 +15,9 @@ postgresql_connection_info = {
 end
 
 {
-  metadata: {
-    password: 'metadata',
-    database_name: 'metadata',
+  pacifica: {
+    password: 'pacifica',
+    database_name: 'pacifica_metadata',
     provider: Chef::Provider::Database::PostgresqlUser,
     connection: postgresql_connection_info,
     action: [:create, :grant],

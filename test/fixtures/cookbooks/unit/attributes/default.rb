@@ -1,3 +1,5 @@
+default['postgresql']['password']['postgres'] = 'postgres'
+default['java']['jdk_version'] = '8'
 default['rabbitmq']['loopback_users'] = []
 default['rabbitmq']['virtualhosts'] = %w(/cart /ingest /uploader)
 default['rabbitmq']['enabled_users'] = [

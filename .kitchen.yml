@@ -33,3 +33,6 @@ suites:
   - name: metadata
     run_list:
       - recipe[unit::metadata]
+  - name: policy
+    run_list:
+      - recipe[unit::policy]

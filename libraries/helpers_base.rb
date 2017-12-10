@@ -34,7 +34,7 @@ module PacificaCookbook
               send(attr, value)
             end
           end
-              end
+        end
       end
 
       def base_config
@@ -83,6 +83,7 @@ HDOC
       def base_service
         service new_resource.service_name do
           action [:enable, :start]
+          subscribes :restart, 'service[postgresql]', :delayed
         end
       end
 
@@ -112,6 +113,7 @@ HDOC
       def base_python_execute_requirements
         python_execute "#{new_resource.name}_requirements" do
           virtualenv prefix_dir
+          notifies :restart, "service[#{new_resource.service_name}]"
           pip_install_opts.each do |attr, value|
             send(attr, value)
           end
