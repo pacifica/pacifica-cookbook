@@ -36,3 +36,6 @@ suites:
   - name: policy
     run_list:
       - recipe[unit::policy]
+  - name: uniqueid
+    run_list:
+      - recipe[unit::uniqueid]
