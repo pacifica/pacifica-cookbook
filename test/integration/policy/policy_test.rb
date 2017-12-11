@@ -9,7 +9,7 @@ describe command 'sleep 7' do
   its(:exit_status) { should eq 0 }
 end
 
-describe port(8121) do
+describe port(8181) do
   it { should be_listening }
 end
 
@@ -17,6 +17,6 @@ describe package 'curl' do
   it { should be_installed }
 end
 
-describe command 'curl localhost:8121/users' do
-  its(:stdout) { should eq '[]' }
+describe command 'curl localhost:8181/status/users/search/dmlb2001/simple' do
+  its(:stdout) { should contain '"person_id": 10' }
 end
