@@ -6,23 +6,18 @@ module PacificaCookbook
     resource_name :pacifica_ingestbackend
 
     property :name, String, name_property: true
-    property :git_opts, Hash, default: {
-      repository: 'https://github.com/pacifica/pacifica-ingest.git',
+    property :pip_install_opts, Hash, default: {
+      command: '-m pip install git+https://github.com/pacifica/pacifica-ingest.git@master',
     }
+    property :run_command, String, default: 'python -m celery -A ingest.backend worker -l info'
     property :service_opts, Hash, default: lazy {
       {
-        environment: {
-          PYTHONPATH: "#{virtualenv_dir}/lib/python2.7/site-packages",
-          VOLUME_PATH: '/srv/',
-          MYSQL_ENV_MYSQL_DATABASE: 'ingest',
-          MYSQL_ENV_MYSQL_PASSWORD: 'ingest',
-          MYSQL_ENV_MYSQL_USER: 'ingest',
+        directory: prefix_dir,
+	environment: {
+	  VOLUME_PATH: '/srv/',
           BROKER_VHOST: '/ingest',
-        },
+	},
       }
-    }
-    property :run_command, String, default: lazy {
-      "#{virtualenv_dir}/bin/python -m celery -A ingest.backend worker -l info"
     }
   end
 end

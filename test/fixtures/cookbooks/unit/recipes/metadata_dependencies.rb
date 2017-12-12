@@ -13,8 +13,15 @@ package 'PostgreSQL Packages' do
   package_name packages
 end
 
+setup_command = if rhel? and node[:platform_version].to_i == 6
+		  'service postgresql initdb'
+		else
+		  'postgresql-setup initdb'
+		end
+
 execute 'Setup PostgreSQL Database' do
-  command 'service postgresql initdb'
+  environment PGSETUP_INITDB_OPTIONS: '--encoding=utf8'
+  command setup_command
   only_if { rhel? }
   not_if { ::File.exist?('/var/lib/pgsql/data/pg_hba.conf') }
 end
@@ -38,7 +45,7 @@ execute 'Wait for DB' do
 end
 
 execute 'Create Pacifica Database' do
-  command %Q(psql -c "create database pacifica_metadata;")
+  command %Q(psql -c "create database pacifica_metadata with encoding 'UTF8';")
   user 'postgres'
   not_if %Q(psql -c '\\l' | grep -q pacifica_metadata), :user => 'postgres'
 end

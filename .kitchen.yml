@@ -39,3 +39,9 @@ suites:
   - name: uniqueid
     run_list:
       - recipe[unit::uniqueid]
+  - name: proxy
+    run_list:
+      - recipe[unit::proxy]
+  - name: ingest
+    run_list:
+      - recipe[unit::ingest]
