@@ -33,7 +33,7 @@ describe 'unit::archiveinterface' do
         end
 
         it 'Creates the bash script file' do
-          expect(chef_run).to create_file('/opt/default/PacificaArchiveinterface')
+          expect(chef_run).to create_file('/opt/default/PacificaArchiveInterface')
         end
 
         it 'Installs python runtime' do
@@ -53,8 +53,8 @@ describe 'unit::archiveinterface' do
         end
 
         it 'Enables and starts the service' do
-          expect(chef_run).to enable_service('PacificaArchiveinterface')
-          expect(chef_run).to start_service('PacificaArchiveinterface')
+          expect(chef_run).to enable_service('PacificaArchiveInterface')
+          expect(chef_run).to start_service('PacificaArchiveInterface')
         end
       end
     end
