@@ -49,7 +49,7 @@ describe 'unit::archiveinterface' do
         end
 
         it 'Creates poise service' do
-          expect(chef_run).to create_poise_service('default')
+          expect(chef_run).to create_poise_service('PacificaArchiveInterface')
         end
 
         it 'Enables and starts the service' do

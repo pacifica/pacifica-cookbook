@@ -65,18 +65,6 @@ if defined?(ChefSpec)
     )
   end
 
-  def install_php_fpm_pool(resource_name)
-    ChefSpec::Matchers::ResourceMatcher.new(
-      :php_fpm_pool, :install, resource_name
-    )
-  end
-
-  def uninstall_php_fpm_pool(resource_name)
-    ChefSpec::Matchers::ResourceMatcher.new(
-      :php_fpm_pool, :uninstall, resource_name
-    )
-  end
-
   def addormodify_selinux_policy_port(resource_name)
     ChefSpec::Matchers::ResourceMatcher.new(
       :selinux_policy_port, :addormodify, resource_name
