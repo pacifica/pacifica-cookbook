@@ -5,19 +5,19 @@ include_recipe 'elasticsearch'
 packages = if ubuntu?
              %w(postgresql postgresql-client)
            elsif rhel?
-	     %w(postgresql-server postgresql)
-	   end
+             %w(postgresql-server postgresql)
+           end
 service_name = 'postgresql'
 
 package 'PostgreSQL Packages' do
   package_name packages
 end
 
-setup_command = if rhel? and node[:platform_version].to_i == 6
-		  'service postgresql initdb'
-		else
-		  'postgresql-setup initdb'
-		end
+setup_command = if rhel? && (node[:platform_version].to_i == 6)
+                  'service postgresql initdb'
+                else
+                  'postgresql-setup initdb'
+                end
 
 execute 'Setup PostgreSQL Database' do
   environment PGSETUP_INITDB_OPTIONS: '--encoding=utf8'
@@ -45,19 +45,19 @@ execute 'Wait for DB' do
 end
 
 execute 'Create Pacifica Database' do
-  command %Q(psql -c "create database pacifica_metadata with encoding 'UTF8';")
+  command %(psql -c "create database pacifica_metadata with encoding 'UTF8';")
   user 'postgres'
-  not_if %Q(psql -c '\\l' | grep -q pacifica_metadata), :user => 'postgres'
+  not_if %(psql -c '\\l' | grep -q pacifica_metadata), user: 'postgres'
 end
 
 execute 'Create Pacifica Role' do
-  command %Q(psql -c "create role pacifica with login password 'pacifica';")
+  command %(psql -c "create role pacifica with login password 'pacifica';")
   user 'postgres'
-  not_if %Q(psql -c 'SELECT rolname FROM pg_roles;' | grep -q pacifica), :user => 'postgres'
+  not_if %(psql -c 'SELECT rolname FROM pg_roles;' | grep -q pacifica), user: 'postgres'
 end
 
 execute 'Grant Pacifica Permissions' do
-  command %Q(psql -c "grant all on database pacifica_metadata to pacifica;")
+  command %(psql -c "grant all on database pacifica_metadata to pacifica;")
   user 'postgres'
-  not_if %Q(psql -c '\\l' | grep -q pacifica=), :user => 'postgres'
+  not_if %(psql -c '\\l' | grep -q pacifica=), user: 'postgres'
 end

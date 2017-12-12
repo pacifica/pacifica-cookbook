@@ -14,25 +14,25 @@ module PacificaCookbook
       variables: {
         hash: {
           global: {
-            'log.access_file': '\'/var/log/proxy-access.log\'',
-	    'log.error_file': '\'/var/log/proxy-error.log\'',
-	    'server.socket_host': '\'127.0.0.1\''
-	  },
-	  '/': {
-            'request.dispatch': 'cherrypy.dispatch.MethodDispatcher()',
-	    'tools.response_headers.on': 'True',
-	    'tools.response_headers.headers': "[('Content-Type', 'application/json')]"
-	  }
-	},
-      }
+            'log.access_file' => '\'/var/log/proxy-access.log\'',
+            'log.error_file' => '\'/var/log/proxy-error.log\'',
+            'server.socket_host' => '\'127.0.0.1\'',
+          },
+          '/' => {
+            'request.dispatch' => 'cherrypy.dispatch.MethodDispatcher()',
+            'tools.response_headers.on' => 'True',
+            'tools.response_headers.headers' => "[('Content-Type', 'application/json')]",
+          },
+        },
+      },
     }
     property :service_opts, Hash, default: lazy {
-	    {
-		    directory: prefix_dir,
-		    environment: {
-			    CHERRYPY_CONFIG: '/opt/default/PacificaProxy.ini'
-		    },
-	    }
+      {
+        directory: prefix_dir,
+        environment: {
+          CHERRYPY_CONFIG: '/opt/default/PacificaProxy.ini',
+        },
+      }
     }
     property :port, Integer, default: 8180
   end

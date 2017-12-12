@@ -13,10 +13,10 @@ module PacificaCookbook
     property :service_opts, Hash, default: lazy {
       {
         directory: prefix_dir,
-	environment: {
-	  VOLUME_PATH: '/srv/',
+        environment: {
+          VOLUME_PATH: '/srv/',
           BROKER_VHOST: '/ingest',
-	},
+        },
       }
     }
   end

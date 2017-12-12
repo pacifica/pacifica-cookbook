@@ -11,12 +11,12 @@ module PacificaCookbook
     }
     property :run_command, String, default: 'python -m celery -A cart worker -l info'
     property :service_opts, Hash, default: lazy {
-        {
-            directory: prefix_dir,
-            environment: {
-                AMQP_VHOST: '/cart',
-            },
-        }
+      {
+        directory: prefix_dir,
+        environment: {
+          AMQP_VHOST: '/cart',
+        },
+      }
     }
   end
 end

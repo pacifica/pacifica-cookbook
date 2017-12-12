@@ -28,7 +28,7 @@ describe command configure_uploader do
   its(:exit_status) { should eq 0 }
 end
 
-upload_command = %q(cd /etc ; LD_LIBRARY_PATH=/opt/rh/python27/root/usr/lib64 /opt/default/bin/CLIUploader upload --logon 10 group)
+upload_command = 'cd /etc ; LD_LIBRARY_PATH=/opt/rh/python27/root/usr/lib64 /opt/default/bin/CLIUploader upload --logon 10 group'
 describe command upload_command do
   its(:exit_status) { should eq 0 }
 end

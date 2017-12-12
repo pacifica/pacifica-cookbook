@@ -14,11 +14,11 @@ packages = if rhel?
              %w(mysql-client mysql-server libmysqlclient-dev)
            end
 service_name = if rhel?
-	         if node[:platform_version].to_i == 6
+                 if node[:platform_version].to_i == 6
                    'mysqld'
-		 elsif node[:platform_version].to_i == 7
-	           'mariadb'
-		 end
+                 elsif node[:platform_version].to_i == 7
+                   'mariadb'
+                 end
                elsif ubuntu?
                  'mysql'
                end
@@ -29,7 +29,7 @@ package 'CentOS SCL Packages' do
 end
 package 'MySQL Packages' do
   package_name packages
-end	
+end
 service 'MySQL Service' do
   service_name service_name
   action [:start, :enable]

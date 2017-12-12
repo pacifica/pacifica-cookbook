@@ -16,43 +16,43 @@ describe 'unit::archiveinterface' do
           ).converge(described_recipe)
         end
 
-        it "Installs the sqlite packages" do
-          expect(chef_run).to install_package("default_packages")
+        it 'Installs the sqlite packages' do
+          expect(chef_run).to install_package('default_packages')
         end
 
-        it "Converges successfully for default" do
+        it 'Converges successfully for default' do
           expect { chef_run }.to_not raise_error
         end
 
-        it "Installs git client" do
+        it 'Installs git client' do
           expect(chef_run).to install_git_client('default')
         end
 
-        it "Creates prefix directory" do
-          expect(chef_run).to create_directory("/opt/default")
+        it 'Creates prefix directory' do
+          expect(chef_run).to create_directory('/opt/default')
         end
 
-        it "Creates the bash script file" do
-          expect(chef_run).to create_file("/opt/default/PacificaArchiveinterface")
+        it 'Creates the bash script file' do
+          expect(chef_run).to create_file('/opt/default/PacificaArchiveinterface')
         end
 
-        it "Installs python runtime" do
+        it 'Installs python runtime' do
           expect(chef_run).to install_python_runtime('default')
         end
 
-        it "Creates python virtual environment" do
+        it 'Creates python virtual environment' do
           expect(chef_run).to create_python_virtualenv('/opt/default')
         end
 
-        it "Installs python requirements by python execute" do
+        it 'Installs python requirements by python execute' do
           expect(chef_run).to run_python_execute('default_requirements')
         end
 
-        it "Creates poise service" do
+        it 'Creates poise service' do
           expect(chef_run).to create_poise_service('default')
         end
 
-        it "Enables and starts the service" do
+        it 'Enables and starts the service' do
           expect(chef_run).to enable_service('PacificaArchiveinterface')
           expect(chef_run).to start_service('PacificaArchiveinterface')
         end

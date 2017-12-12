@@ -20,7 +20,7 @@ module PacificaCookbook
     property :git_client_opts, Hash, default: {}
     property :service_opts, Hash, default: lazy {
       {
-        directory: prefix_dir
+        directory: prefix_dir,
       }
     }
     property :port, Integer, default: 8080
