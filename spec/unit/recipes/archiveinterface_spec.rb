@@ -48,6 +48,10 @@ describe 'unit::archiveinterface' do
           expect(chef_run).to run_python_execute('default_requirements')
         end
 
+        it 'Creates template config' do
+          expect(chef_run).to create_template('/opt/default/PacificaArchiveInterface.ini')
+        end
+
         it 'Creates poise service' do
           expect(chef_run).to enable_poise_service('PacificaArchiveInterface')
         end
