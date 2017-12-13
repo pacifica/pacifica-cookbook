@@ -45,3 +45,9 @@ suites:
   - name: ingest
     run_list:
       - recipe[unit::ingest]
+  - name: uploader
+    run_list:
+      - recipe[unit::uploader]
+  - name: uploadercli
+    run_list:
+      - recipe[unit::uploadercli]

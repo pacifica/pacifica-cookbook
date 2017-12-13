@@ -82,8 +82,7 @@ HDOC
 
       def base_service
         service new_resource.service_name do
-          action [:enable, :start]
-          subscribes :restart, 'service[postgresql]', :delayed
+          action new_resource.service_actions
         end
       end
 
