@@ -11,7 +11,7 @@ describe 'unit::ingest' do
     stub_command("psql -c '\\l' | grep -q pacifica_metadata").and_return(true)
     stub_command("psql -c 'SELECT rolname FROM pg_roles;' | grep -q pacifica").and_return(true)
     stub_command("psql -c '\\l' | grep -q pacifica=").and_return(true)
-    stub_command("curl localhost:8121/users | grep -q dmlb2001").and_return(true)
+    stub_command('curl localhost:8121/users | grep -q dmlb2001').and_return(true)
     stub_command("/usr/bin/mysql -e 'show databases;' | grep -q pacifica_uniqueid").and_return(true)
     stub_command("/usr/bin/mysql -e 'select User from mysql.user;' | grep uniqueid").and_return(true)
     stub_command("/usr/bin/mysql -e 'show databases;' | grep -q pacifica_ingest").and_return(true)
