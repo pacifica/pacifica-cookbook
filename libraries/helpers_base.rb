@@ -44,7 +44,7 @@ module PacificaCookbook
           owner 'root'
           group 'root'
           mode '0600'
-          notifies :restart, "service[#{new_resource.service_name}]"
+          notifies :restart, "service[#{new_resource.service_name}]" unless new_resource.service_disabled
           config_opts.each do |attr, value|
             send(attr, value)
           end
@@ -67,7 +67,7 @@ HDOC
           script_opts.each do |attr, value|
             send(attr, value)
           end
-        end
+        end unless new_resource.service_disabled
       end
 
       def base_poise_service
@@ -77,13 +77,13 @@ HDOC
           service_opts.each do |attr, value|
             send(attr, value)
           end
-        end
+        end unless new_resource.service_disabled
       end
 
       def base_service
         service new_resource.service_name do
           action new_resource.service_actions
-        end
+        end unless new_resource.service_disabled
       end
 
       def base_python_runtime
@@ -112,7 +112,7 @@ HDOC
       def base_python_execute_requirements
         python_execute "#{new_resource.name}_requirements" do
           virtualenv prefix_dir
-          notifies :restart, "service[#{new_resource.service_name}]"
+          notifies :restart, "service[#{new_resource.service_name}]" unless new_resource.service_disabled
           pip_install_opts.each do |attr, value|
             send(attr, value)
           end

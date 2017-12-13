@@ -28,6 +28,7 @@ module PacificaCookbook
       "#{prefix_dir}/bin/#{command_name}"
     }
     property :service_actions, String, default: [:enable, :start]
+    property :service_disabled, [TrueClass, FalseClass], default: false
     default_action :create
     action :create do
       extend PacificaCookbook::PacificaHelpers::Base

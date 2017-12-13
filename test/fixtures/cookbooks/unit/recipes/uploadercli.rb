@@ -1,0 +1,1 @@
+pacifica_uploadercli 'default'
