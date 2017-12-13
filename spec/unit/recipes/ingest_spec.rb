@@ -8,6 +8,7 @@ require 'spec_helper'
 
 describe 'unit::ingest' do
   before do
+    stub_command("psql -c '\\l' | grep -q pacifica_metadata").and_return(true)
     stub_command("/usr/bin/mysql -e 'show databases;' | grep -q pacifica_ingest").and_return(true)
     stub_command("/usr/bin/mysql -e 'select User from mysql.user;' | grep ingest").and_return(true)
   end
