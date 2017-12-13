@@ -16,7 +16,6 @@ end
 describe package 'curl' do
   it { should be_installed }
 end
-hashsum = Digest::SHA1.file('README.md').hexdigest
-describe command "curl localhost:8180/files/sha1/#{hashsum}" do
-  its(:stdout) { should contain '# Pacifica Cookbook' }
+describe command "curl localhost:8180/files/sha1/0beec7b5ea3f0fdbc95d0dd47f3c5bc275da8a33" do
+  its(:stdout) { should contain 'foo' }
 end
