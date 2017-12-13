@@ -27,7 +27,7 @@ module PacificaCookbook
     property :run_command, String, default: lazy {
       "#{prefix_dir}/bin/#{command_name}"
     }
-    property :service_actions, String, default: [:enable, :start]
+    property :service_actions, Array, default: [:enable, :start]
     property :service_disabled, [TrueClass, FalseClass], default: false
     default_action :create
     action :create do
