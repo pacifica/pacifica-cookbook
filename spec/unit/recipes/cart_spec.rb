@@ -9,7 +9,7 @@ require 'spec_helper'
 describe 'unit::cart' do
   before do
     stub_command("/usr/bin/mysql -e 'show databases;' | grep -q pacifica_cart").and_return(true)
-    stub_command("/usr/bin/mysql -e 'select User from mysql.user;' | grep -q cartd").and_return(true)
+    stub_command("/usr/bin/mysql -e 'select User from mysql.user;' | grep cartd").and_return(true)
   end
   supported_platforms.each do |platform, versions|
     versions.each do |version|
