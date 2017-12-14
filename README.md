@@ -20,23 +20,17 @@ configuration of cgroups and storage back ends.
 
 | Platform     | Tested |
 |--------------|:------:|
-| centos-7.3   | ✔      |
+| centos-6.9   | ✔      |
+| centos-7.4   | ✔      |
 | ubuntu-16.04 | ✔      |
 
 ## Cookbook Dependencies
 
 - [compat_resource](https://supermarket.chef.io/cookbooks/compat_resource)
-- [docker](https://supermarket.chef.io/cookbooks/docker)
-- [apache2](https://supermarket.chef.io/cookbooks/apache2)
 - [git](https://supermarket.chef.io/cookbooks/git)
 - [poise-python](https://supermarket.chef.io/cookbooks/poise-python)
-- [systemd](https://supermarket.chef.io/cookbooks/systemd)
-- [php](https://supermarket.chef.io/cookbooks/php)
-- [varnish](https://supermarket.chef.io/cookbooks/varnish)
+- [poise-service](https://supermarket.chef.io/cookbooks/poise-service)
 - [chef-sugar](https://supermarket.chef.io/cookbooks/chef-sugar)
-- [selinux](https://supermarket.chef.io/cookbooks/selinux)
-- [selinux_policy](https://supermarket.chef.io/cookbooks/selinux_policy)
-- [yum-epel](https://supermarket.chef.io/cookbooks/yum-epel)
 
 ### Other Notes
 This cookbook does not provide the following services, nor does it offer the means to configure by default:
@@ -45,11 +39,6 @@ This cookbook does not provide the following services, nor does it offer the mea
 * elasticsearch - Suggested cookbook [elasticsearch](https://supermarket.chef.io/cookbooks/elasticsearch)
 * rabbit - Suggested cookbook [rabbitmq](https://supermarket.chef.io/cookbooks/rabbitmq)
 * java - Suggested cookbook [java](https://supermarket.chef.io/cookbooks/java)
-
-There is minimal configuration provided for:
-* [apache2/httpd](https://supermarket.chef.io/cookbooks/apache2)
-* [nginx](https://supermarket.chef.io/cookbooks/chef_nginx)
-* [varnish](https://supermarket.chef.io/cookbooks/varnish)
 
 These services will need to be configured to taste before utilizing the custom resources this cookbook provides.
 
@@ -80,9 +69,9 @@ These services will need to be configured to taste before utilizing the custom r
   libraries/pacifica_base.rb and tailored resource properties
 - [pacifica_uniqueid](#pacifica_uniqueid): composite resource that uses
   libraries/pacifica_base.rb and tailored resource properties
-- [pacifica_uploaderbackend](#pacifica_uploaderbackend): composite resource that uses
+- [pacifica_uploader](#pacifica_uploader): composite resource that uses
   libraries/pacifica_base.rb and tailored resource properties
-- [pacifica_uploaderfrontend](#pacifica_uploaderfrontend): composite resource that uses
+- [pacifica_uploadercli](#pacifica_uploadercli): composite resource that uses
   libraries/pacifica_base.rb and tailored resource properties
 - [pacifica_reporting](#pacifica_reporting): composite resource that uses
   libraries/pacifica_base_php.rb and tailored resource properties
@@ -109,22 +98,8 @@ See full documentation for each resource and action below for more information.
 - git_opts - git resource options appended via hash
 - git_client_opts - git client resource options appended via hash
 - service_opts - systemd_service resource options appended via hash
-- wsgi_file - Name of the wsgi for a defined service
 - port - http socket port used in the init script for each service
 - run_command - composite property used to activate a defined Pacifica service
-
-## `pacifica_base_php.rb` shared properties:
-- name - Name of the resource
-- prefix - prefix directory to put source code git clones
-- directory_opts - prefix directory resource options appended via hash
-<!-- - site_fqdn, String, default: 'http://127.0.0.1' -->
-- git_opts - git resource options appended via hash
-- git_client_opts - git client resource options appended via hash
-- php_fpm_opts - appended via hash
-- ci_prod_config_opts - appended via hash
-- ci_prod_config_vars - appended via hash
-- ci_prod_database_opts - appended via hash
-- ci_prod_database_vars - appended via hash
 
 ## pacifica_archiveinterface
 
@@ -216,68 +191,24 @@ The `pacifica_uniqueid` resource manages the uniqueid service and associated con
 pacifica_uniqueid 'uniqueid'
 ```
 
-## pacifica_uploaderbackend
+## pacifica_uploader
 
-The `pacifica_uploaderbackend` resource manages the uploader back-end service and associated configuration.
+The `pacifica_uploader` resource manages the uploader python library and associated configuration.
 
 ### Example
 
 ```ruby
-pacifica_uploaderbackend 'uploaderd'
+pacifica_uploader 'uploader'
 ```
 
-## pacifica_uploaderfrontend
+## pacifica_uploadercli
 
-The `pacifica_uploaderfrontend` resource manages the uploader front-end service and associated configuration.
-
-### Example
-
-```ruby
-pacifica_uploaderfrontend 'uploaderwsgi'
-```
-
-## pacifica_reporting
-
-The `pacifica_reporting` resource manages the reporting service and associated configuration.
+The `pacifica_uploadercli` resource manages the uploader CLI and associated configuration.
 
 ### Example
 
 ```ruby
-pacifica_reporting 'reporting'
-```
-
-## pacifica_status
-
-The `pacifica_status` resource manages the status service and associated configuration.
-
-### Example
-
-```ruby
-pacifica_status 'status'
-```
-
-## pacifica_nginx
-
-The `pacifica_nginx` resource manages a basic nginx service and associated configuration.
-
-### Example
-
-```ruby
-pacifica_nginx 'nginxai' do
-  backend_hosts ['127.0.0.1:8080']
-end
-```
-
-## pacifica_varnish
-
-The `pacifica_varnish` resource manages a basic varnish service and associated configuration.
-
-### Example
-
-```ruby
-pacifica_varnish 'varnishai' do
-  backend_hosts ['127.0.0.1:8080']
-end
+pacifica_uploadercli 'uploadercli'
 ```
 
 ## Testing and Development
