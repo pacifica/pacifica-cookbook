@@ -13,8 +13,5 @@ end
 version '0.1.0'
 
 depends 'pacifica'
-depends 'elasticsearch', '>= 3.0.0'
-depends 'java', '>= 1.40.0'
+depends 'pacifica-dependencies'
 depends 'chef-sugar', '>= 3.4.0'
-depends 'rabbitmq', '>= 4.10.0'
-depends 'build-essential'
