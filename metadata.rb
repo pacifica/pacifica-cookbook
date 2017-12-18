@@ -15,9 +15,8 @@ version '1.0.0'
 chef_version '>= 12'
 
 supports 'ubuntu', '>= 16.04'
-supports 'centos', '>= 7.0'
-supports 'redhat', '>= 7.0'
-supports 'freebsd', '>= 11.0'
+supports 'centos', '>= 6.0'
+supports 'redhat', '>= 6.0'
 
 depends 'git'
 depends 'poise-python'
