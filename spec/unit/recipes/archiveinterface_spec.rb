@@ -33,7 +33,7 @@ describe 'unit::archiveinterface' do
         end
 
         it 'Creates the bash script file' do
-          expect(chef_run).to create_file('/opt/default/PacificaArchiveInterface')
+          expect(chef_run).to create_file('/opt/default/default-pacifica-archiveinterface')
         end
 
         it 'Installs python runtime' do
@@ -49,16 +49,16 @@ describe 'unit::archiveinterface' do
         end
 
         it 'Creates template config' do
-          expect(chef_run).to create_template('/opt/default/PacificaArchiveInterface.ini')
+          expect(chef_run).to create_template('/opt/default/default-pacifica-archiveinterface.ini')
         end
 
         it 'Creates poise service' do
-          expect(chef_run).to enable_poise_service('PacificaArchiveInterface')
+          expect(chef_run).to enable_poise_service('default-pacifica-archiveinterface')
         end
 
         it 'Enables and starts the service' do
-          expect(chef_run).to enable_service('PacificaArchiveInterface')
-          expect(chef_run).to start_service('PacificaArchiveInterface')
+          expect(chef_run).to enable_service('default-pacifica-archiveinterface')
+          expect(chef_run).to start_service('default-pacifica-archiveinterface')
         end
       end
     end

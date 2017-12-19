@@ -6,7 +6,7 @@ module PacificaCookbook
   class PacificaBase < ChefCompat::Resource
     include PacificaHelpers::BaseDirectories
     property :name, String, name_property: true
-    property :service_name, String, default: lazy { "#{name}-#{resource_name.to_s.gsub(/_/, '-')}" }
+    property :service_name, String, default: lazy { "#{name}-#{resource_name.to_s.tr('_', '-')}" }
     property :script_name, String, default: lazy { service_name }
     property :config_name, String, default: lazy { "#{service_name}.ini" }
     property :command_name, String, default: 'Server.py'
