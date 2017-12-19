@@ -35,7 +35,7 @@ module PacificaCookbook
       {
         directory: prefix_dir,
         environment: {
-          ARCHIVEI_CONFIG: config_name,
+          ARCHIVEI_CONFIG: "#{prefix_dir}/#{config_name}",
         },
       }
     }

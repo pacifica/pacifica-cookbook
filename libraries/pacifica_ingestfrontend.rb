@@ -32,7 +32,7 @@ module PacificaCookbook
         environment: {
           VOLUME_PATH: '/srv/',
           BROKER_VHOST: '/ingest',
-          CHERRYPY_CONFIG: config_name,
+          CHERRYPY_CONFIG: "#{prefix_dir}/#{config_name}",
         },
       }
     }
