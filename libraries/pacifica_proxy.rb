@@ -30,7 +30,7 @@ module PacificaCookbook
       {
         directory: prefix_dir,
         environment: {
-          CHERRYPY_CONFIG: '/opt/default/PacificaProxy.ini',
+          CHERRYPY_CONFIG: config_name,
         },
       }
     }

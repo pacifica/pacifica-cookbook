@@ -31,7 +31,7 @@ module PacificaCookbook
         directory: prefix_dir,
         environment: {
           AMQP_VHOST: '/cart',
-          CHERRYPY_CONFIG: '/opt/default/PacificaCartFrontend.ini',
+          CHERRYPY_CONFIG: config_name,
         },
       }
     }
