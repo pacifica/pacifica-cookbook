@@ -25,7 +25,7 @@ module PacificaCookbook
     }
     property :port, Integer, default: 8080
     property :run_command, String, default: lazy {
-      "#{prefix_dir}/bin/#{command_name}"
+      "#{prefix_dir}/bin/#{command_name} --port #{port}"
     }
     property :service_actions, Array, default: [:enable, :start]
     property :service_disabled, [TrueClass, FalseClass], default: false
