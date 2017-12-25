@@ -71,7 +71,7 @@ suites:
   - name: wrapper-policy
     run_list:
       - recipe[unit::policy_dependencies]
-            - recipe[pacifica::policy]
+      - recipe[pacifica::policy]
   - name: wrapper-proxy
     run_list:
       - recipe[unit::proxy_dependencies]
