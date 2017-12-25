@@ -53,4 +53,36 @@ suites:
       - recipe[unit::uploadercli]
   - name: wrapper-archiveinterface
     run_list:
-      - recipe[pacifica::archiveinterface]     
+      - recipe[pacifica::archiveinterface]
+  - name: wrapper-cart
+    run_list:
+      - recipe[unit::cart_dependencies]
+      - recipe[pacifica::cartfrontend]
+      - recipe[pacifica::cartbackend]
+  - name: wrapper-ingest
+    run_list:
+      - recipe[unit::ingest_dependencies]
+      - recipe[pacifica::ingestfrontend]
+      - recipe[pacifica::ingestbackend]
+  - name: wrapper-metadata
+    run_list:
+      - recipe[unit::metadata_dependencies]
+      - recipe[pacifica::metadata]
+  - name: wrapper-policy
+    run_list:
+      - recipe[unit::policy_dependencies]
+            - recipe[pacifica::policy]
+  - name: wrapper-proxy
+    run_list:
+      - recipe[unit::proxy_dependencies]
+      - recipe[pacifica::proxy]
+  - name: wrapper-uniqueid
+    run_list:
+      - recipe[unit::uniqueid_dependencies]
+      - recipe[pacifica::uniqueid]
+  - name: wrapper-uploader
+    run_list:
+      - recipe[pacifica::uploader]
+  - name: wrapper-uploadercli
+    run_list:
+      - recipe[pacifica::uploadercli]

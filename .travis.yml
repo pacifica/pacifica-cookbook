@@ -12,6 +12,7 @@ before_script:
   - eval "$(/opt/chefdk/bin/chef shell-init bash)"
 
 script:
+  - /bin/bash -xe travis/pre-commit.sh
   - /opt/chefdk/embedded/bin/chef --version
   - /opt/chefdk/embedded/bin/cookstyle --version
   - /opt/chefdk/embedded/bin/cookstyle
