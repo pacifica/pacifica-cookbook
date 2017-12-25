@@ -51,3 +51,6 @@ suites:
   - name: uploadercli
     run_list:
       - recipe[unit::uploadercli]
+  - name: wrapper-archiveinterface
+    run_list:
+      - recipe[pacifica::archiveinterface]     
