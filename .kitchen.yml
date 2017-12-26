@@ -67,7 +67,7 @@ suites:
   - name: wrapper-metadata
     run_list:
       - recipe[unit::metadata_dependencies]
-      - recipe[pacifica::metadata]
+      - recipe[pacifica::metadatad]
   - name: wrapper-policy
     run_list:
       - recipe[unit::policy_dependencies]
