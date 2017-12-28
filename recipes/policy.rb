@@ -1,1 +1,1 @@
-call_pacifica_resource 'policy'
+pacifica_data_bag_wrapper 'policy'

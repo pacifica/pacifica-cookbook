@@ -1,1 +1,1 @@
-call_pacifica_resource 'proxy'
+pacifica_data_bag_wrapper 'proxy'

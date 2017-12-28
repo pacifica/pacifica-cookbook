@@ -1,1 +1,1 @@
-call_pacifica_resource 'metadata'
+pacifica_data_bag_wrapper 'metadata'

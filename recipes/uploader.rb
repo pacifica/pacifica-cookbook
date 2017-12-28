@@ -1,1 +1,1 @@
-call_pacifica_resource 'uploader'
+pacifica_data_bag_wrapper 'uploader'

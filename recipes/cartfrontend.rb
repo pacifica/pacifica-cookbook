@@ -1,1 +1,1 @@
-call_pacifica_resource 'cartfrontend'
+pacifica_data_bag_wrapper 'cartfrontend'

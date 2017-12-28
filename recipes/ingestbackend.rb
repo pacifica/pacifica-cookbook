@@ -1,1 +1,1 @@
-call_pacifica_resource 'ingestbackend'
+pacifica_data_bag_wrapper 'ingestbackend'

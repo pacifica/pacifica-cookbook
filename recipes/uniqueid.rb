@@ -1,1 +1,1 @@
-call_pacifica_resource 'uniqueid'
+pacifica_data_bag_wrapper 'uniqueid'

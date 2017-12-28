@@ -1,2 +1,2 @@
-call_pacifica_resource 'uploader'
-call_pacifica_resource 'uploadercli'
+pacifica_data_bag_wrapper 'uploader'
+pacifica_data_bag_wrapper 'uploadercli'

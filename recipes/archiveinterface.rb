@@ -1,1 +1,1 @@
-call_pacifica_resource 'archiveinterface'
+pacifica_data_bag_wrapper 'archiveinterface'
