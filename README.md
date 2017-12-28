@@ -73,14 +73,6 @@ These services will need to be configured to taste before utilizing the custom r
   libraries/pacifica_base.rb and tailored resource properties
 - [pacifica_uploadercli](#pacifica_uploadercli): composite resource that uses
   libraries/pacifica_base.rb and tailored resource properties
-- [pacifica_reporting](#pacifica_reporting): composite resource that uses
-  libraries/pacifica_base_php.rb and tailored resource properties
-- [pacifica_status](#pacifica_status): composite resource that uses
-  libraries/pacifica_base_php.rb and tailored resource properties
-- [pacifica_nginx](#pacifica_nginx): resource provides a minimal nginx configuration
-  and creates selinux policies on RHEL systems
-- [pacifica_varnish](#pacifica_varnish): resource provides a varnish configuration,
-  deploys the varnish service, and creates selinux policies on RHEL systems
 
 See full documentation for each resource and action below for more information.
 
