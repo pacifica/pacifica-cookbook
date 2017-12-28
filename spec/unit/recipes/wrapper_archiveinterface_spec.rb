@@ -12,7 +12,7 @@ describe 'pacifica::archiveinterface' do
       context "on an #{platform.capitalize}-#{version} box" do
         cached(:chef_run) do
           ChefSpec::ServerRunner.new(
-            platform: platform, version: version
+            platform: platform, version: version, step_into: 'pacifica_data_bag_wrapper'
           ) do |node, server|
             node.normal['pacifica']['archiveinterface']['instances'] = %w(foo bar)
             server.create_data_bag(
