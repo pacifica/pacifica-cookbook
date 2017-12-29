@@ -45,7 +45,7 @@ module PacificaCookbook
           group 'root'
           mode '0600'
           notifies :restart, "service[#{new_resource.service_name}]" unless new_resource.service_disabled
-      new_resource.config_opts.each do |attr, value|
+          new_resource.config_opts.each do |attr, value|
             send(attr, value)
           end
         end
@@ -64,7 +64,7 @@ export LD_RUN_PATH=/opt/chef/embedded/lib:/opt/rh/python27/root/usr/lib64
 exec -a #{new_resource.service_name} #{new_resource.run_command}
 HDOC
           notifies :restart, "service[#{new_resource.service_name}]"
-      new_resource.script_opts.each do |attr, value|
+          new_resource.script_opts.each do |attr, value|
             send(attr, value)
           end
         end unless new_resource.service_disabled
@@ -74,7 +74,7 @@ HDOC
         poise_service new_resource.service_name do
           command "#{prefix_dir}/#{new_resource.script_name}"
           provider :sysvinit if redhat? && (node['platform_version'].to_i == 6)
-      new_resource.service_opts.each do |attr, value|
+          new_resource.service_opts.each do |attr, value|
             send(attr, value)
           end
         end unless new_resource.service_disabled
@@ -113,7 +113,7 @@ HDOC
         python_execute "#{new_resource.name}_requirements" do
           virtualenv prefix_dir
           notifies :restart, "service[#{new_resource.service_name}]" unless new_resource.service_disabled
-      new_resource.pip_install_opts.each do |attr, value|
+          new_resource.pip_install_opts.each do |attr, value|
             send(attr, value)
           end
         end
