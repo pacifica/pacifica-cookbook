@@ -10,12 +10,12 @@ module PacificaCookbook
     property :variables, Hash, default: {}
     default_action :create
     action :create do
-      template = data_bag_item(node.read(*data_bag_path), node.read(*template_item_path))
+      template = data_bag_item(node.read(*new_resource.data_bag_path), node.read(*new_resource.template_item_path))
       template.delete('id')
-      node.read(*instances_list_path).each do |instance|
+      node.read(*new_resource.instances_list_path).each do |instance|
         new_config = {}
         Chef::Mixin::DeepMerge.deep_merge(template, new_config)
-        merge_config = data_bag_item(node.read(*data_bag_path), instance)
+        merge_config = data_bag_item(node.read(*new_resource.data_bag_path), instance)
         Chef::Mixin::DeepMerge.deep_merge(merge_config, new_config)
         erb_config_str = new_config.to_json
         renderer = ERB.new(erb_config_str)
