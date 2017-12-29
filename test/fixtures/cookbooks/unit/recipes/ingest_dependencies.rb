@@ -1,0 +1,6 @@
+include_recipe 'unit::policy'
+include_recipe 'unit::archiveinterface'
+include_recipe 'unit::uniqueid'
+include_recipe 'pacifica-dependencies::mysql_service'
+include_recipe 'pacifica-dependencies::rabbitmq'
+include_recipe 'pacifica-dependencies::ingestdb_setup'

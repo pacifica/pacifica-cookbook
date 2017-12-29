@@ -6,19 +6,34 @@ module PacificaCookbook
     resource_name :pacifica_metadata
 
     property :name, String, name_property: true
-    property :git_opts, Hash, default: {
-      repository: 'https://github.com/pacifica/pacifica-metadata.git',
+    property :command_name, String, default: 'MetadataServer.py'
+    property :pip_install_opts, Hash, default: {
+      command: '-m pip install git+https://github.com/pacifica/pacifica-metadata.git@master',
+    }
+    property :config_opts, Hash, default: {
+      variables: {
+        hash: {
+          global: {
+            'log.access_file' => '\'/var/log/metadata-access.log\'',
+            'log.error_file' => '\'/var/log/metadata-error.log\'',
+            'server.socket_host' => '\'127.0.0.1\'',
+          },
+          '/' => {
+            'request.dispatch' => 'cherrypy.dispatch.MethodDispatcher()',
+            'tools.response_headers.on' => 'True',
+            'tools.response_headers.headers' => "[('Content-Type', 'application/json')]",
+          },
+        },
+      },
     }
     property :service_opts, Hash, default: lazy {
       {
+        directory: prefix_dir,
         environment: {
-          POSTGRES_ENV_POSTGRES_DB: 'metadata',
-          POSTGRES_ENV_POSTGRES_USER: 'metadata',
-          POSTGRES_ENV_POSTGRES_PASSWORD: 'metadata',
+          CHERRYPY_CONFIG: "#{prefix_dir}/#{config_name}",
         },
       }
     }
-    property :wsgi_file, String, default: 'MetadataServer.py'
     property :port, Integer, default: 8121
   end
 end

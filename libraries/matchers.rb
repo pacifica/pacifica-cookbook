@@ -35,12 +35,6 @@ if defined?(ChefSpec)
     )
   end
 
-  def create_pacifica_nginx(resource_name)
-    ChefSpec::Matchers::ResourceMatcher.new(
-      :pacifica_nginx, :create, resource_name
-    )
-  end
-
   def create_pacifica_policy(resource_name)
     ChefSpec::Matchers::ResourceMatcher.new(
       :pacifica_policy, :create, resource_name
@@ -71,24 +65,6 @@ if defined?(ChefSpec)
     )
   end
 
-  def create_pacifica_varnish(resource_name)
-    ChefSpec::Matchers::ResourceMatcher.new(
-      :pacifica_varnish, :create, resource_name
-    )
-  end
-
-  def install_php_fpm_pool(resource_name)
-    ChefSpec::Matchers::ResourceMatcher.new(
-      :php_fpm_pool, :install, resource_name
-    )
-  end
-
-  def uninstall_php_fpm_pool(resource_name)
-    ChefSpec::Matchers::ResourceMatcher.new(
-      :php_fpm_pool, :uninstall, resource_name
-    )
-  end
-
   def addormodify_selinux_policy_port(resource_name)
     ChefSpec::Matchers::ResourceMatcher.new(
       :selinux_policy_port, :addormodify, resource_name
@@ -104,30 +80,6 @@ if defined?(ChefSpec)
   def deploy_selinux_policy_module(resource_name)
     ChefSpec::Matchers::ResourceMatcher.new(
       :selinux_policy_module, :deploy, resource_name
-    )
-  end
-
-  def configure_vcl_template(resource_name)
-    ChefSpec::Matchers::ResourceMatcher.new(
-      :vcl_template, :configure, resource_name
-    )
-  end
-
-  def configure_varnish_repo(resource_name)
-    ChefSpec::Matchers::ResourceMatcher.new(
-      :varnish_repo, :configure, resource_name
-    )
-  end
-
-  def configure_varnish_log(resource_name)
-    ChefSpec::Matchers::ResourceMatcher.new(
-      :varnish_log, :configure, resource_name
-    )
-  end
-
-  def configure_varnish_config(resource_name)
-    ChefSpec::Matchers::ResourceMatcher.new(
-      :varnish_config, :configure, resource_name
     )
   end
 

@@ -8,16 +8,80 @@ provisioner:
   # For example:
   #   always_update_cookbooks: <%= !ENV['CI'] %>
   always_update_cookbooks: true
-  require_chef_omnibus: 12
 
 verifier:
   name: inspec
 
 platforms:
   - name: ubuntu-16.04
-  - name: centos-7.3
+    run_list:
+     - recipe[apt]
+    attributes:
+      apt:
+        compile_time_update: true
+  - name: centos-6.9
+  - name: centos-7.4
 
 suites:
-  - name: default
+  - name: archiveinterface
     run_list:
-      - recipe[test::default]
+      - recipe[unit::archiveinterface]
+  - name: cart
+    run_list:
+      - recipe[unit::cart]
+  - name: metadata
+    run_list:
+      - recipe[unit::metadata]
+  - name: policy
+    run_list:
+      - recipe[unit::policy]
+  - name: uniqueid
+    run_list:
+      - recipe[unit::uniqueid]
+  - name: proxy
+    run_list:
+      - recipe[unit::proxy]
+  - name: ingest
+    run_list:
+      - recipe[unit::ingest]
+  - name: uploader
+    run_list:
+      - recipe[unit::uploader]
+  - name: uploadercli
+    run_list:
+      - recipe[unit::uploadercli]
+  - name: wrapper-archiveinterface
+    run_list:
+      - recipe[pacifica::archiveinterface]
+  - name: wrapper-cart
+    run_list:
+      - recipe[unit::cart_dependencies]
+      - recipe[pacifica::cartfrontend]
+      - recipe[pacifica::cartbackend]
+  - name: wrapper-ingest
+    run_list:
+      - recipe[unit::ingest_dependencies]
+      - recipe[pacifica::ingestfrontend]
+      - recipe[pacifica::ingestbackend]
+  - name: wrapper-metadata
+    run_list:
+      - recipe[unit::metadata_dependencies]
+      - recipe[pacifica::metadatad]
+  - name: wrapper-policy
+    run_list:
+      - recipe[unit::policy_dependencies]
+      - recipe[pacifica::policy]
+  - name: wrapper-proxy
+    run_list:
+      - recipe[unit::proxy_dependencies]
+      - recipe[pacifica::proxy]
+  - name: wrapper-uniqueid
+    run_list:
+      - recipe[unit::uniqueid_dependencies]
+      - recipe[pacifica::uniqueid]
+  - name: wrapper-uploader
+    run_list:
+      - recipe[pacifica::uploader]
+  - name: wrapper-uploadercli
+    run_list:
+      - recipe[pacifica::uploadercli]

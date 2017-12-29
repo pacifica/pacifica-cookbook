@@ -1,0 +1,24 @@
+repos:
+-   repo: git://github.com/pre-commit/pre-commit-hooks
+    sha: v1.1.1
+    hooks:
+            -   id: trailing-whitespace
+            -   id: check-merge-conflict
+            -   id: end-of-file-fixer
+            -   id: check-added-large-files
+            -   id: check-json
+            -   id: check-vcs-permalinks
+            -   id: mixed-line-ending
+            -   id: pretty-format-json
+                args:
+                  - --autofix
+                  - --top-keys=id
+            -   id: sort-simple-yaml
+                files: '.yaml$'
+            -   id: check-symlinks
+            -   id: check-yaml
+            -   id: detect-private-key
+-   repo: git://github.com/Lucas-C/pre-commit-hooks
+    sha: v1.1.4
+    hooks:
+    -   id: remove-tabs

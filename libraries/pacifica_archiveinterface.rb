@@ -6,29 +6,39 @@ module PacificaCookbook
     resource_name :pacifica_archiveinterface
 
     property :name, String, name_property: true
-    property :git_opts, Hash, default: {
-      repository: 'https://github.com/pacifica/pacifica-archiveinterface.git',
+    property :command_name, String, default: 'ArchiveInterfaceServer.py'
+    property :pip_install_opts, Hash, default: {
+      command: '-m pip install git+https://github.com/pacifica/pacifica-archiveinterface.git@master',
     }
-    property :script_opts, Hash, default: lazy {
-      {
-        content: <<EOF
-#!/bin/bash
-. #{virtualenv_dir}/bin/activate
-export LD_LIBRARY_PATH=/opt/chef/embedded/lib
-export LD_RUN_PATH=/opt/chef/embedded/lib
-cd /
-exec -a #{name} #{run_command}
-EOF
-      }
+    property :config_opts, Hash, default: {
+      variables: {
+        hash: {
+          posix: {
+            use_id2filename: false,
+          },
+          hpss: {
+            user: 'hpss.unix',
+            auth: '/var/hpss/etc/hpss.unix.keytab',
+          },
+          hms_sideband: {
+            sam_qfs_prefix: '/pacificadata',
+            schema: 'samqfs1db',
+            host: 'host',
+            user: 'user',
+            password: 'pass',
+            port: 3306,
+          },
+        },
+      },
     }
     property :service_opts, Hash, default: lazy {
       {
+        directory: prefix_dir,
         environment: {
-          ARCHIVEI_CONFIG: "#{source_dir}/config.cfg",
+          ARCHIVEI_CONFIG: "#{prefix_dir}/#{config_name}",
         },
       }
     }
-    property :wsgi_file, String, default: 'archiveinterface/wsgi.py'
     property :port, Integer, default: 8080
   end
 end
