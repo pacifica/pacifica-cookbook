@@ -61,7 +61,7 @@ module PacificaCookbook
 . #{prefix_dir}/bin/activate
 export LD_LIBRARY_PATH=/opt/chef/embedded/lib:/opt/rh/python27/root/usr/lib64
 export LD_RUN_PATH=/opt/chef/embedded/lib:/opt/rh/python27/root/usr/lib64
-exec -a #{new_resource.service_name} #{run_command}
+exec -a #{new_resource.service_name} #{new_resource.run_command}
 HDOC
           notifies :restart, "service[#{new_resource.service_name}]"
           script_opts.each do |attr, value|
