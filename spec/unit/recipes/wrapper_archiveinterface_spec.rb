@@ -22,11 +22,11 @@ describe 'pacifica::archiveinterface' do
               },
               'foo' => {
                 'id' => 'foo',
-                'port' => '8192',
+                'port' => 8192,
               },
               'bar' => {
                 'id' => 'bar',
-                'port' => '4096',
+                'port' => 4096,
               }
             )
           end.converge(described_recipe)
@@ -35,11 +35,18 @@ describe 'pacifica::archiveinterface' do
         it 'Converges successfully for default' do
           expect { chef_run }.to_not raise_error
         end
+        it 'Creates the pacifica archiveinterface data bag wrapper' do
+          expect(chef_run).to create_pacifica_data_bag_wrapper('archiveinterface')
+        end
         it 'Creates foo pacifica archiveinterface' do
-          expect(chef_run).to create_pacifica_archiveinterface('foo')
+          expect(chef_run).to create_pacifica_archiveinterface('foo').with(
+            port: 8192
+          )
         end
         it 'Creates bar pacifica archiveinterface' do
-          expect(chef_run).to create_pacifica_archiveinterface('bar')
+          expect(chef_run).to create_pacifica_archiveinterface('bar').with(
+            port: 4096
+          )
         end
       end
     end
