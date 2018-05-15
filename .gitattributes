@@ -1,3 +1,4 @@
 *.rb text eol=lf
 *.md text eol=lf
+*.json text eol=lf
 .git* text eol=lf
