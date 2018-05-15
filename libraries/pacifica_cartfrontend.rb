@@ -10,7 +10,7 @@ module PacificaCookbook
     property :pip_install_opts, Hash, default: {
       command: '-m pip install git+https://github.com/pacifica/pacifica-cartd.git@master',
     }
-    property :config_opts, Hash, default: {
+    property :cpconfig_opts, Hash, default: {
       variables: {
         hash: {
           global: {
@@ -31,7 +31,7 @@ module PacificaCookbook
         directory: prefix_dir,
         environment: {
           AMQP_VHOST: '/cart',
-          CHERRYPY_CONFIG: "#{prefix_dir}/#{config_name}",
+          CHERRYPY_CONFIG: "#{prefix_dir}/#{cpconfig_name}",
         },
       }
     }

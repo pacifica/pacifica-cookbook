@@ -10,6 +10,27 @@ module PacificaCookbook
     property :pip_install_opts, Hash, default: {
       command: '-m pip install git+https://github.com/pacifica/pacifica-archiveinterface.git@master',
     }
+    property :cpconfig_opts, Hash, default: {
+      variables: {
+        hash: {
+          'global' => {
+            'log.screen' => 'True',
+            'log.access_file' => '\'access.log\'',
+            'log.error_file' => '\'error.log\'',
+            'server.socket_host' => '\'0.0.0.0\'',
+            'server.socket_port' => 8080,
+            'server.max_request_body_size' => 0,
+            'server.socket_timeout' => 60,
+            'response.timeout' => 3600,
+          },
+          '/' => {
+            'request.dispatch' => 'cherrypy.dispatch.MethodDispatcher()',
+            'tools.response_headers.on' => 'True',
+            'tools.response_headers.headers' => '[(\'Content-Type\', \'application/json\')]',
+          },
+        },
+      },
+    }
     property :config_opts, Hash, default: {
       variables: {
         hash: {
@@ -36,6 +57,7 @@ module PacificaCookbook
         directory: prefix_dir,
         environment: {
           ARCHIVEI_CONFIG: "#{prefix_dir}/#{config_name}",
+          CP_CONFIG: "#{prefix_dir}/#{cpconfig_name}",
         },
       }
     }

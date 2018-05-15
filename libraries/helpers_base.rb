@@ -37,6 +37,20 @@ module PacificaCookbook
         end
       end
 
+      def base_cpconfig
+        template "#{prefix_dir}/#{new_resource.config_name}" do
+          source 'config.ini.erb'
+          cookbook 'pacifica'
+          owner 'root'
+          group 'root'
+          mode '0600'
+          notifies :restart, "service[#{new_resource.service_name}]" unless new_resource.service_disabled
+          new_resource.cpconfig_opts.each do |attr, value|
+            send(attr, value)
+          end
+        end
+      end
+
       def base_config
         template "#{prefix_dir}/#{new_resource.config_name}" do
           source 'config.ini.erb'
