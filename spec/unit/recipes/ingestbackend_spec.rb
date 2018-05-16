@@ -26,10 +26,6 @@ describe 'unit::ingest' do
           ).converge(described_recipe)
         end
 
-        it 'Setups pacifica ingest frontend' do
-          expect(chef_run).to create_pacifica_ingestfrontend('default')
-        end
-
         it 'Setups pacifica ingest backend' do
           expect(chef_run).to create_pacifica_ingestbackend('default')
         end
