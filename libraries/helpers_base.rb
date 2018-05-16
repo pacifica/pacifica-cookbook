@@ -38,7 +38,7 @@ module PacificaCookbook
       end
 
       def base_cpconfig
-        template "#{prefix_dir}/#{new_resource.config_name}" do
+        template "#{prefix_dir}/#{new_resource.cpconfig_name}" do
           source 'config.ini.erb'
           cookbook 'pacifica'
           owner 'root'
