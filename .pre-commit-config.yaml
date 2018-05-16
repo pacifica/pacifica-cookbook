@@ -28,9 +28,4 @@ repos:
     hooks:
     -   id: check-cookstyle
     -   id: check-foodcritic
--   repo: local
-    hooks:
-    -   id: rspec
-        name: rspec
-        entry: rspec spec/unit/recipes
-        language: system
+    -   id: check-rspec

@@ -24,10 +24,6 @@ describe 'unit::cart' do
           expect(chef_run).to create_pacifica_cartfrontend('default')
         end
 
-        it 'Setups pacifica cart backend' do
-          expect(chef_run).to create_pacifica_cartbackend('default')
-        end
-
         it 'Converges successfully for default' do
           expect { chef_run }.to_not raise_error
         end

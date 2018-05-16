@@ -1,7 +1,7 @@
 # This is the primary shared library for Pacifica custom resources
 module PacificaCookbook
   # Pacifica base class with common properties and actions
-  class PacificaDBWrapper < ChefCompat::Resource
+  class PacificaDBWrapper < Chef::Resource
     resource_name :pacifica_data_bag_wrapper
     property :name, String, name_property: true
     property :data_bag_path, Array, default: lazy { ['pacifica', name, 'data_bag'] }
