@@ -3,7 +3,7 @@ module PacificaCookbook
   require_relative 'helpers_base'
   require_relative 'helpers_base_dir'
   # Pacifica base class with common properties and actions
-  class PacificaBase < ChefCompat::Resource
+  class PacificaBase < Chef::Resource
     include PacificaHelpers::BaseDirectories
     property :name, String, name_property: true
     property :service_name, String, default: lazy { "#{name}-#{resource_name.to_s.tr('_', '-')}" }
