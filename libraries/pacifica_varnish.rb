@@ -3,7 +3,7 @@ require 'digest'
 module PacificaCookbook
   require_relative 'helpers_varnish'
   # Manages the Pacifica varnish service
-  class PacificaVarnish < ChefCompat::Resource
+  class PacificaVarnish < Chef::Resource
     include PacificaHelpers::Varnish
     resource_name :pacifica_varnish
 
