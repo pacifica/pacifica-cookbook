@@ -19,6 +19,8 @@ script:
   - /opt/chefdk/embedded/bin/cookstyle
   - /opt/chefdk/embedded/bin/foodcritic --version
   - /opt/chefdk/embedded/bin/foodcritic .
+  - /opt/chefdk/embedded/bin/berks --version
+  - /opt/chefdk/embedded/bin/berks install
   - /opt/chefdk/embedded/bin/rspec --version
   - /opt/chefdk/embedded/bin/rspec
 
