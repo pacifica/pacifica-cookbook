@@ -2,7 +2,7 @@ require 'digest'
 # pacifica cookbook module
 module PacificaCookbook
   # Manages the Pacifica nginx service
-  class PacificaNginx < ChefCompat::Resource
+  class PacificaNginx < Chef::Resource
     resource_name :pacifica_nginx
 
     property :name, String, name_property: true
