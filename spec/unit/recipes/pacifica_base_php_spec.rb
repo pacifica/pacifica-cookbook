@@ -44,11 +44,11 @@ describe 'test::pacifica_base_php' do
             end
 
             it "#{resource_key}:  Sets the #{resource_value} SELinux Policy Port" do
-              expect(chef_run).to addormodify_selinux_policy_port("#{resource_value}_9000")
+              expect(chef_run).to nothing_selinux_policy_port("#{resource_value}_9000")
             end
 
             it "#{resource_key}:  Sets the #{resource_value} SELinux Policy Boolean" do
-              expect(chef_run).to setpersist_selinux_policy_boolean("#{resource_value}_httpd")
+              expect(chef_run).to nothing_selinux_policy_boolean("#{resource_value}_httpd")
             end
 
             it "#{resource_key}:  Fixes the ownership of the source files in #{resource_value} repo" do
