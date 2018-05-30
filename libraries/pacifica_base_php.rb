@@ -120,7 +120,7 @@ module PacificaCookbook
                  else
                    default_additional_attrs
                  end
-      php_fpm_opts_dup = php_fpm_opts.clone
+      php_fpm_opts_dup = php_fpm_opts.deep_dup
       php_fpm_opts_dup[:additional_config] = new_hash
       # Set SELinux Policy Port
       selinux_policy_port "#{new_resource.name}_#{listen_port}" do
