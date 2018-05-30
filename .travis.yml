@@ -22,7 +22,7 @@ script:
   - /opt/chefdk/embedded/bin/berks --version
   - /opt/chefdk/embedded/bin/berks install
   - /opt/chefdk/embedded/bin/rspec --version
-  - /opt/chefdk/embedded/bin/rspec
+  - /opt/chefdk/embedded/bin/rspec --fail-fast
 
 notifications:
   email:
