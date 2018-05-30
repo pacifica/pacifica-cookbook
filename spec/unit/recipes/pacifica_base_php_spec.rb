@@ -43,14 +43,6 @@ describe 'test::pacifica_base_php' do
               expect(chef_run).to run_execute("set_#{resource_value}_selinux_context")
             end
 
-            it "#{resource_key}:  Sets the #{resource_value} SELinux Policy Port" do
-              expect(chef_run).to nothing_selinux_policy_port("#{resource_value}_9000")
-            end
-
-            it "#{resource_key}:  Sets the #{resource_value} SELinux Policy Boolean" do
-              expect(chef_run).to nothing_selinux_policy_boolean("#{resource_value}_httpd")
-            end
-
             it "#{resource_key}:  Fixes the ownership of the source files in #{resource_value} repo" do
               expect(chef_run).to run_execute("chcon -R system_u:object_r:httpd_sys_content_t:s0 /opt/#{resource_value}/source")
             end
