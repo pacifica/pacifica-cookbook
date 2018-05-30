@@ -120,7 +120,8 @@ module PacificaCookbook
                  else
                    default_additional_attrs
                  end
-      php_fpm_opts[:additional_config] = new_hash
+      php_fpm_opts_dup = php_fpm_opts.clone
+      php_fpm_opts_dup[:additional_config] = new_hash
       # Set SELinux Policy Port
       selinux_policy_port "#{new_resource.name}_#{listen_port}" do
         name listen_port
@@ -141,7 +142,7 @@ module PacificaCookbook
         listen "/var/run/php5-fpm-#{new_resource.name}.sock"
         chdir source_dir
         notifies :restart, "service[#{node['php']['fpm_service']}_#{new_resource.name}]"
-        default_attrs.merge(php_fpm_opts).each do |attr, value|
+        default_attrs.merge(php_fpm_opts_dup).each do |attr, value|
           send(attr, value)
         end
       end
