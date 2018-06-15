@@ -20,6 +20,7 @@ def mysql_cart_db
 end
 
 def postgres_metadata_db
+  postgres_encoding_cmds
   stub_command("psql -c '\\l' | grep -q pacifica_metadata").and_return(true)
   stub_command("psql -c 'SELECT rolname FROM pg_roles;' | grep -q pacifica").and_return(true)
   stub_command("psql -c '\\l' | grep -q pacifica=").and_return(true)
