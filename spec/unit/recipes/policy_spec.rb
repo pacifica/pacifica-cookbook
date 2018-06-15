@@ -8,10 +8,7 @@ require 'spec_helper'
 
 describe 'unit::policy' do
   before do
-    stub_command("psql -c '\\l' | grep -q pacifica_metadata").and_return(true)
-    stub_command("psql -c 'SELECT rolname FROM pg_roles;' | grep -q pacifica").and_return(true)
-    stub_command("psql -c '\\l' | grep -q pacifica=").and_return(true)
-    stub_command('curl localhost:8121/users | grep -q dmlb2001').and_return(true)
+    postgres_metadata_db
   end
   supported_platforms.each do |platform, versions|
     versions.each do |version|
