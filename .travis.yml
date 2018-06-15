@@ -6,6 +6,27 @@ addons:
     packages:
       - chefdk
 
+env:
+  matrix:
+  - T=archiveinterface
+  - T=cart
+  - T=metadata
+  - T=policy
+  - T=uniqueid
+  - T=proxy
+  - T=ingest
+  - T=uploader
+  - T=uploadercli
+  - T=wrapper-archiveinterface
+  - T=wrapper-cart
+  - T=wrapper-ingest
+  - T=wrapper-metadata
+  - T=wrapper-policy
+  - T=wrapper-proxy
+  - T=wrapper-uniqueid
+  - T=wrapper-uploader
+  - T=wrapper-uploadercli
+
 install: echo "skip bundle install"
 
 before_script:
@@ -13,10 +34,12 @@ before_script:
 
 script:
   - /opt/chefdk/embedded/bin/chef --version
+  - /opt/chefdk/embedded/bin/chef gem install kitchen-dokken
   - /opt/chefdk/embedded/bin/cookstyle --version
   - /opt/chefdk/embedded/bin/foodcritic --version
   - /opt/chefdk/embedded/bin/rspec --version
   - /bin/bash -xe travis/pre-commit.sh
+  - /opt/chefdk/embedded/bin/kitchen test $T -d always
 
 notifications:
   email:
