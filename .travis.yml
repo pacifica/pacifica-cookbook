@@ -1,4 +1,7 @@
 dist: trusty
+sudo: required
+group: edge
+services: docker
 addons:
   apt:
     sources:
