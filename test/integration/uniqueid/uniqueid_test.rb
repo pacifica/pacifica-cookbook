@@ -14,6 +14,6 @@ describe package 'curl' do
 end
 
 describe command 'curl "localhost:8051/getid?range=1&mode=test"' do
-  its(:stdout) { should contain 'endIndex' }
-  its(:stdout) { should contain 'startIndex' }
+  its(:stdout) { should include 'endIndex' }
+  its(:stdout) { should include 'startIndex' }
 end
