@@ -18,5 +18,5 @@ describe package 'curl' do
 end
 
 describe command 'curl localhost:8181/status/users/search/dmlb2001/simple' do
-  its(:stdout) { should contain '"person_id": 10' }
+  its(:stdout) { should include '"person_id": 10' }
 end

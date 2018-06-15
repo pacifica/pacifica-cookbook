@@ -17,5 +17,5 @@ describe package 'curl' do
   it { should be_installed }
 end
 describe command 'curl localhost:8180/files/sha1/0beec7b5ea3f0fdbc95d0dd47f3c5bc275da8a33' do
-  its(:stdout) { should contain 'foo' }
+  its(:stdout) { should include 'foo' }
 end
