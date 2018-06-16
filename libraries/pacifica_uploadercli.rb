@@ -11,7 +11,7 @@ module PacificaCookbook
     }
     property :config_opts, Hash, default: {
       variables: {
-        content: <<EOH
+        content: <<EOH,
 [
   {
     "destinationTable": "Transactions.submitter",
@@ -99,7 +99,7 @@ module PacificaCookbook
   }
 ]
 EOH
-      }
+      },
     }
     property :service_disabled, [TrueClass, FalseClass], default: true
   end
