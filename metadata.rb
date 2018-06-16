@@ -10,13 +10,13 @@ end
 if respond_to?(:source_url)
   source_url 'https://github.com/pacifica/pacifica-cookbook'
 end
-version '2.0.2'
+version '2.0.3'
 
 chef_version '>= 12'
 
 supports 'ubuntu', '>= 16.04'
-supports 'centos', '>= 6.0'
-supports 'redhat', '>= 6.0'
+supports 'centos', '>= 7.0'
+supports 'redhat', '>= 7.0'
 
 depends 'git'
 depends 'poise-python'

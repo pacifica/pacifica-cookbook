@@ -20,13 +20,11 @@ configuration of cgroups and storage back ends.
 
 | Platform     | Tested |
 |--------------|:------:|
-| centos-6.9   | ✔      |
 | centos-7.4   | ✔      |
 | ubuntu-16.04 | ✔      |
 
 ## Cookbook Dependencies
 
-- [compat_resource](https://supermarket.chef.io/cookbooks/compat_resource)
 - [git](https://supermarket.chef.io/cookbooks/git)
 - [poise-python](https://supermarket.chef.io/cookbooks/poise-python)
 - [poise-service](https://supermarket.chef.io/cookbooks/poise-service)
