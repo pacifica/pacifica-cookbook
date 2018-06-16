@@ -1,22 +1,73 @@
 dist: trusty
+sudo: required
+group: edge
+services: docker
 addons:
   apt:
     sources:
       - chef-stable-trusty
     packages:
       - chefdk
+stages:
+- lint
+- test
 
 install: echo "skip bundle install"
 
 before_script:
-  - eval "$(/opt/chefdk/bin/chef shell-init bash)"
+- eval "$(/opt/chefdk/bin/chef shell-init bash)"
 
+env:
+- T=archiveinterface-ubuntu-16
+- T=archiveinterface-centos-7
+- T=cart-ubuntu-16
+- T=cart-centos-7
+- T=metadata-ubuntu-16
+- T=metadata-centos-7
+- T=policy-ubuntu-16
+- T=policy-centos-7
+- T=uniqueid-ubuntu-16
+- T=uniqueid-centos-7
+- T=proxy-ubuntu-16
+- T=proxy-centos-7
+- T=ingest-ubuntu-16
+- T=ingest-centos-7
+- T=uploader-ubuntu-16
+- T=uploader-centos-7
+- T=uploadercli-ubuntu-16
+- T=uploadercli-centos-7
+- T=wrapper-archiveinterface-ubuntu-16
+- T=wrapper-archiveinterface-centos-7
+- T=wrapper-cart-ubuntu-16
+- T=wrapper-cart-centos-7
+- T=wrapper-ingest-ubuntu-16
+- T=wrapper-ingest-centos-7
+- T=wrapper-metadata-ubuntu-16
+- T=wrapper-metadata-centos-7
+- T=wrapper-policy-ubuntu-16
+- T=wrapper-policy-centos-7
+- T=wrapper-proxy-ubuntu-16
+- T=wrapper-proxy-centos-7
+- T=wrapper-uniqueid-ubuntu-16
+- T=wrapper-uniqueid-centos-7
+- T=wrapper-uploader-ubuntu-16
+- T=wrapper-uploader-centos-7
+- T=wrapper-uploadercli-ubuntu-16
+- T=wrapper-uploadercli-centos-7
 script:
-  - /opt/chefdk/embedded/bin/chef --version
-  - /opt/chefdk/embedded/bin/cookstyle --version
-  - /opt/chefdk/embedded/bin/foodcritic --version
-  - /opt/chefdk/embedded/bin/rspec --version
-  - /bin/bash -xe travis/pre-commit.sh
+- /opt/chefdk/embedded/bin/chef gem install kitchen-dokken
+- /opt/chefdk/embedded/bin/kitchen test $T -d always
+
+jobs:
+  include:
+  - stage: lint
+    env:
+    script:
+    - /opt/chefdk/embedded/bin/chef --version
+    - /opt/chefdk/embedded/bin/cookstyle --version
+    - /opt/chefdk/embedded/bin/foodcritic --version
+    - /opt/chefdk/embedded/bin/rspec --version
+    - /bin/bash -xe travis/pre-commit.sh
 
 notifications:
   email:

@@ -34,6 +34,6 @@ describe command upload_command do
 end
 
 describe command 'sleep 5; curl localhost:8066/get_state?job_id=1' do
-  its(:stdout) { should contain '"task_percent": "100.00000"' }
-  its(:stdout) { should contain '"state": "OK"' }
+  its(:stdout) { should include '"task_percent": "100.00000"' }
+  its(:stdout) { should include '"state": "OK"' }
 end

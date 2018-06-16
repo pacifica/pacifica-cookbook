@@ -8,8 +8,7 @@ require 'spec_helper'
 
 describe 'unit::uniqueid' do
   before do
-    stub_command("/usr/bin/mysql -e 'show databases;' | grep -q pacifica_uniqueid").and_return(true)
-    stub_command("/usr/bin/mysql -e 'select User from mysql.user;' | grep uniqueid").and_return(true)
+    mysql_uniqueid_db
   end
   supported_platforms.each do |platform, versions|
     versions.each do |version|
