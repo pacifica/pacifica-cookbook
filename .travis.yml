@@ -26,44 +26,42 @@ jobs:
 
   - stage: test
     env:
-      matrix:
-      - T=archiveinterface-ubuntu-16
-      - T=archiveinterface-centos-7
-      - T=cart-ubuntu-16
-      - T=cart-centos-7
-      - T=metadata-ubuntu-16
-      - T=metadata-centos-7
-      - T=policy-ubuntu-16
-      - T=policy-centos-7
-      - T=uniqueid-ubuntu-16
-      - T=uniqueid-centos-7
-      - T=proxy-ubuntu-16
-      - T=proxy-centos-7
-      - T=ingest-ubuntu-16
-      - T=ingest-centos-7
-      - T=uploader-ubuntu-16
-      - T=uploader-centos-7
-      - T=uploadercli-ubuntu-16
-      - T=uploadercli-centos-7
-      - T=wrapper-archiveinterface-ubuntu-16
-      - T=wrapper-archiveinterface-centos-7
-      - T=wrapper-cart-ubuntu-16
-      - T=wrapper-cart-centos-7
-      - T=wrapper-ingest-ubuntu-16
-      - T=wrapper-ingest-centos-7
-      - T=wrapper-metadata-ubuntu-16
-      - T=wrapper-metadata-centos-7
-      - T=wrapper-policy-ubuntu-16
-      - T=wrapper-policy-centos-7
-      - T=wrapper-proxy-ubuntu-16
-      - T=wrapper-proxy-centos-7
-      - T=wrapper-uniqueid-ubuntu-16
-      - T=wrapper-uniqueid-centos-7
-      - T=wrapper-uploader-ubuntu-16
-      - T=wrapper-uploader-centos-7
-      - T=wrapper-uploadercli-ubuntu-16
-      - T=wrapper-uploadercli-centos-7
-
+    - T=archiveinterface-ubuntu-16
+    - T=archiveinterface-centos-7
+    - T=cart-ubuntu-16
+    - T=cart-centos-7
+    - T=metadata-ubuntu-16
+    - T=metadata-centos-7
+    - T=policy-ubuntu-16
+    - T=policy-centos-7
+    - T=uniqueid-ubuntu-16
+    - T=uniqueid-centos-7
+    - T=proxy-ubuntu-16
+    - T=proxy-centos-7
+    - T=ingest-ubuntu-16
+    - T=ingest-centos-7
+    - T=uploader-ubuntu-16
+    - T=uploader-centos-7
+    - T=uploadercli-ubuntu-16
+    - T=uploadercli-centos-7
+    - T=wrapper-archiveinterface-ubuntu-16
+    - T=wrapper-archiveinterface-centos-7
+    - T=wrapper-cart-ubuntu-16
+    - T=wrapper-cart-centos-7
+    - T=wrapper-ingest-ubuntu-16
+    - T=wrapper-ingest-centos-7
+    - T=wrapper-metadata-ubuntu-16
+    - T=wrapper-metadata-centos-7
+    - T=wrapper-policy-ubuntu-16
+    - T=wrapper-policy-centos-7
+    - T=wrapper-proxy-ubuntu-16
+    - T=wrapper-proxy-centos-7
+    - T=wrapper-uniqueid-ubuntu-16
+    - T=wrapper-uniqueid-centos-7
+    - T=wrapper-uploader-ubuntu-16
+    - T=wrapper-uploader-centos-7
+    - T=wrapper-uploadercli-ubuntu-16
+    - T=wrapper-uploadercli-centos-7
     script:
     - /opt/chefdk/embedded/bin/chef gem install kitchen-dokken
     - /opt/chefdk/embedded/bin/kitchen test $T -d always
