@@ -1,6 +1,3 @@
 {
-  "id": "template",
-  "python_opts": {
-    "provider": "system"
-  }
+  "id": "template"
 }
