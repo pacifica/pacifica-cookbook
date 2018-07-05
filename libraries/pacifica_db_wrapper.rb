@@ -23,7 +23,7 @@ module PacificaCookbook
         new_config = JSON.parse(ERB.new(new_config.to_json).result())
         declare_resource("pacifica_#{new_resource.name}".to_sym, instance) do
           new_config.each do |key, value|
-            send(key, Marshal::load(Marshal::dump(value)))
+            send(key, Marshal.load(Marshal.dump(value)))
           end
         end
       end
