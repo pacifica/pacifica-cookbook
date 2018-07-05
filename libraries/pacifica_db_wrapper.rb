@@ -20,13 +20,10 @@ module PacificaCookbook
         new_config.delete('chef_type')
         new_config.delete('data_bag')
         new_config.delete('id')
-        erb_config_str = new_config.to_json
-        renderer = ERB.new(erb_config_str)
-        new_config_str = renderer.result()
-        new_config = JSON.parse(new_config_str)
+        new_config = JSON.parse(ERB.new(new_config.to_json).result())
         declare_resource("pacifica_#{new_resource.name}".to_sym, instance) do
           new_config.each do |key, value|
-            send(key, value)
+            send(key, Marshal.load(Marshal.dump(value)))
           end
         end
       end
