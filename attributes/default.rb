@@ -5,6 +5,8 @@
   ingestbackend
   ingestfrontend
   metadata
+  notifybackend
+  notifyfrontend
   policy
   proxy
   uniqueid

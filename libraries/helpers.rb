@@ -6,6 +6,8 @@ def call_pacifica_resource(resource)
     'ingestbackend' => ->(name, &block) { pacifica_ingestbackend(name, &block) },
     'ingestfrontend' => ->(name, &block) { pacifica_ingestfrontend(name, &block) },
     'metadata' => ->(name, &block) { pacifica_metadata(name, &block) },
+    'notifyfrontend' => ->(name, &block) { pacifica_notifyfrontend(name, &block) },
+    'notifybackend' => ->(name, &block) { pacifica_notifybackend(name, &block) },
     'policy' => ->(name, &block) { pacifica_policy(name, &block) },
     'proxy' => ->(name, &block) { pacifica_proxy(name, &block) },
     'uniqueid' => ->(name, &block) { pacifica_uniqueid(name, &block) },
