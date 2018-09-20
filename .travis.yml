@@ -18,42 +18,15 @@ before_script:
 - eval "$(/opt/chefdk/bin/chef shell-init bash)"
 
 env:
-- T=archiveinterface-ubuntu-16
-- T=archiveinterface-centos-7
-- T=cart-ubuntu-16
-- T=cart-centos-7
-- T=metadata-ubuntu-16
-- T=metadata-centos-7
-- T=policy-ubuntu-16
-- T=policy-centos-7
-- T=uniqueid-ubuntu-16
-- T=uniqueid-centos-7
-- T=proxy-ubuntu-16
-- T=proxy-centos-7
-- T=ingest-ubuntu-16
-- T=ingest-centos-7
-- T=uploader-ubuntu-16
-- T=uploader-centos-7
-- T=uploadercli-ubuntu-16
-- T=uploadercli-centos-7
-- T=wrapper-archiveinterface-ubuntu-16
-- T=wrapper-archiveinterface-centos-7
-- T=wrapper-cart-ubuntu-16
-- T=wrapper-cart-centos-7
-- T=wrapper-ingest-ubuntu-16
-- T=wrapper-ingest-centos-7
-- T=wrapper-metadata-ubuntu-16
-- T=wrapper-metadata-centos-7
-- T=wrapper-policy-ubuntu-16
-- T=wrapper-policy-centos-7
-- T=wrapper-proxy-ubuntu-16
-- T=wrapper-proxy-centos-7
-- T=wrapper-uniqueid-ubuntu-16
-- T=wrapper-uniqueid-centos-7
-- T=wrapper-uploader-ubuntu-16
-- T=wrapper-uploader-centos-7
-- T=wrapper-uploadercli-ubuntu-16
-- T=wrapper-uploadercli-centos-7
+- T=archiveinterface
+- T=cart
+- T=metadata
+- T=policy
+- T=uniqueid
+- T=proxy
+- T=ingest
+- T=uploader
+- T=notifications
 script:
 - /opt/chefdk/embedded/bin/chef gem install kitchen-dokken
 - /opt/chefdk/embedded/bin/kitchen test $T -d always
@@ -62,17 +35,22 @@ jobs:
   include:
   - stage: lint
     env:
+    services:
+    sudo:
+    language: python
+    python: 3.6
     script:
     - /opt/chefdk/embedded/bin/chef --version
     - /opt/chefdk/embedded/bin/cookstyle --version
     - /opt/chefdk/embedded/bin/foodcritic --version
     - /opt/chefdk/embedded/bin/rspec --version
-    - /bin/bash -xe travis/pre-commit.sh
+    - pip install pre-commit
+    - pre-commit run -a
 
 notifications:
   email:
     recipients:
-      - dmlb2000@gmail.com
-      - gitbytes@gmail.com
+    - dmlb2000@gmail.com
+    - gitbytes@gmail.com
     on_failure: never
     on_success: always

@@ -60,6 +60,9 @@ suites:
   - name: uploadercli
     run_list:
       - recipe[unit::uploadercli]
+  - name: notifications
+    run_list:
+      - recipe[unit::notify]
   - name: wrapper-archiveinterface
     run_list:
       - recipe[pacifica::archiveinterface]
@@ -95,3 +98,8 @@ suites:
   - name: wrapper-uploadercli
     run_list:
       - recipe[pacifica::uploadercli]
+  - name: wrapper-notifications
+    run_list:
+      - recipe[unit::notify_dependencies]
+      - recipe[pacifica::notifyfrontend]
+      - recipe[pacifica::notifybackend]
