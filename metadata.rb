@@ -10,7 +10,7 @@ end
 if respond_to?(:source_url)
   source_url 'https://github.com/pacifica/pacifica-cookbook'
 end
-version '2.1.0'
+version '2.2.0'
 
 chef_version '>= 14'
 
@@ -22,3 +22,4 @@ depends 'git'
 depends 'poise-python'
 depends 'poise-service'
 depends 'chef-sugar'
+depends 'chef-vault'
