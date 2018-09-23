@@ -7,6 +7,8 @@ module PacificaCookbook
     property :data_bag_path, Array, default: lazy { ['pacifica', name, 'data_bag'] }
     property :template_item_path, Array, default: lazy { ['pacifica', name, 'template'] }
     property :instances_list_path, Array, default: lazy { ['pacifica', name, 'instances'] }
+    property :db_data_bag_path, Array, default: %w(pacifica secrets vault)
+    property :db_secrets_path, Array, default: %w(pacifica secrets item)
     property :variables, Hash, default: {}
     default_action :create
     action :create do
@@ -20,7 +22,13 @@ module PacificaCookbook
         new_config.delete('chef_type')
         new_config.delete('data_bag')
         new_config.delete('id')
-        new_config = JSON.parse(ERB.new(new_config.to_json).result())
+        namespace = OpenStruct.new(
+          db_data_bag: chef_vault_item(
+            node.read(*new_resource.db_data_bag_path),
+            node.read(*new_resource.db_secrets_path)
+          ).to_hash
+        )
+        new_config = JSON.parse(ERB.new(new_config.to_json).result(namespace.instance_eval { binding }))
         declare_resource("pacifica_#{new_resource.name}".to_sym, instance) do
           new_config.each do |key, value|
             send(key, Marshal.load(Marshal.dump(value)))

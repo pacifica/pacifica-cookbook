@@ -17,3 +17,5 @@
   default['pacifica'][service]['instances'] = ['default']
   default['pacifica'][service]['template'] = 'template'
 end
+default['pacifica']['secrets']['vault'] = 'pacifica_vault'
+default['pacifica']['secrets']['item'] = 'secrets'

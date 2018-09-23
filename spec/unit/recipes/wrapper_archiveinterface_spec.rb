@@ -16,6 +16,13 @@ describe 'pacifica::archiveinterface' do
           ) do |node, server|
             node.normal['pacifica']['archiveinterface']['instances'] = %w(foo bar)
             server.create_data_bag(
+              'pacifica_vault',
+              'secrets' => {
+                'id' => 'secrets',
+                'key' => 'secret_value',
+              }
+            )
+            server.create_data_bag(
               'pacifica_archiveinterface',
               'template' => {
                 'id' => 'template',
